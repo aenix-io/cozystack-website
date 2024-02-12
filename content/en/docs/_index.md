@@ -1,0 +1,17 @@
+---
+title: "Cozystack Documentation"
+linkTitle: "Documentation"
+description: "Open and extensible continuous delivery solution for Kubernetes."
+taxonomyCloud: []
+cascade:
+  type: docs
+menu:
+  main:
+    weight: 40
+---
+
+Cozystack is an open-source PaaS platform for cloud providers.
+
+With Cozystack, you can transform your bunch of servers into an intelligent system with a simple REST API for spawning Kubernetes clusters, Database-as-a-Service, virtual machines, load balancers, HTTP caching services, and other services with ease.
+
+You can use Cozystack to build your own cloud or to provide a cost-effective development environments.  

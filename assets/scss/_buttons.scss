@@ -13,12 +13,12 @@
 }
 
 @mixin flat-white-button {
-  color: $flux-mid-gray !important;
-  background-color: $flux-white !important;
+  color: $cozy-mid-gray !important;
+  background-color: $cozy-white !important;
   border: none;
 
   &:hover {
-    color: $flux-gray !important;
+    color: $cozy-gray !important;
     box-shadow: none !important;
     text-shadow: none !important;
   }
@@ -46,8 +46,8 @@
 @mixin projects-btn-secondary {
   a.btn-secondary {
     @include flat-white-button;
-    background-color: $flux-light-blue !important;
-    color: $flux-gray !important;
+    background-color: $cozy-light-blue !important;
+    color: $cozy-gray !important;
 
     margin-right: 1rem;
     padding-left: 1rem;

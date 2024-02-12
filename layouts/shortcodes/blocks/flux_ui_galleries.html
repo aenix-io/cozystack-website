@@ -1,0 +1,42 @@
+{{ $one := slice "Weave GitOps" "/img/uis/wego-*.png" "wego" }}
+{{ $two := slice "VS Code GitOps Tools" "/img/uis/vscode-*.png" "vscode" }}
+{{ $data := slice $one $two }}
+
+{{ range $data }}
+    {{ $title := index . 0 }}
+    {{ $glob := index . 1 }}
+    {{ $id := index . 2 }}
+<h3 id="{{ $title | urlize }}">{{ $title }}</h3>
+<div class="card-group">
+    {{ $match := resources.Match $glob }}
+    {{ range $match }}
+    <div class="card">
+        <div class="card-body" style="padding: 0rem;">
+            <img src="{{ .RelPermalink }}" class="img-thumbnail" data-toggle="modal" data-target="#{{ $id }}">
+        </div>
+    </div>
+    {{ end }}
+</div>
+
+<div class="modal fade" id="{{ $id }}" tabindex="-1"aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div id="{{ $id }}-carousel" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner">
+                    {{ $match := resources.Match $glob }}
+                    {{ range first 1 $match }}
+                    <div class="carousel-item active" data-interval="2500">
+                        <img src="{{ .RelPermalink }}" class="d-block w-100">
+                    </div>
+                    {{ end }}
+                    {{ range after 1 $match }}
+                    <div class="carousel-item" data-interval="2500">
+                        <img src="{{ .RelPermalink }}" class="d-block w-100">
+                    </div>
+                    {{ end }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{{ end }}

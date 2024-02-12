@@ -130,7 +130,7 @@
       .logo {
         height: 120px;
         display: flex;
-        background-color: $flux-white;
+        background-color: $cozy-white;
         opacity: 1;
         img {
           max-width: 552px;
@@ -175,7 +175,7 @@
             h3 {
               font-variant-caps: all-small-caps;
               font-weight: 700;
-              color: $flux-lighter-blue;
+              color: $cozy-lighter-blue;
             }
           }
         }
@@ -238,7 +238,7 @@
         padding: 1rem;
 
         #carousel-caption {
-          color: $flux-darkest-blue;
+          color: $cozy-darkest-blue;
         }
       }
     }

@@ -3,20 +3,20 @@
 
 @mixin white-background-a {
   a {
-    color: $flux-lighter-blue !important;
+    color: $cozy-lighter-blue !important;
 
     &:hover {
-      color: $flux-darkest-blue !important;
+      color: $cozy-darkest-blue !important;
     }
   }
 }
 
 @mixin gray-background-a {
   a {
-    color: $flux-light-blue !important;
+    color: $cozy-light-blue !important;
 
     &:hover {
-      color: $flux-dark-blue !important;
+      color: $cozy-dark-blue !important;
     }
   }
 }
@@ -79,7 +79,7 @@ main.td-main {
 
 .resources {
   h4 {
-    color: $flux-white;
+    color: $cozy-white;
     font-size: 1.25rem;
     font-weight: 600;
     margin: 0.85rem 0;
@@ -169,7 +169,7 @@ main.td-main {
     }
 
     .carousel-inner {
-      background: $flux-white;
+      background: $cozy-white;
       .carousel-item {
         height: 220px;
 
@@ -190,7 +190,7 @@ main.td-main {
           }
         }
         .carousel-item-caption {
-          color: $flux-gray;
+          color: $cozy-gray;
           font-size: 1.8rem;
         }
       }
@@ -228,11 +228,11 @@ main.td-main {
 
 .section-community {
   @include gray-background-a;
-  background-color: $flux-gray;
+  background-color: $cozy-gray;
 
 
   .td-box--dark {
-    background-color: $flux-gray;
+    background-color: $cozy-gray;
   }
 
   a {
@@ -241,7 +241,7 @@ main.td-main {
 
   .section-label {
     margin: 0 0 2rem 0;
-    color: $flux-white !important;
+    color: $cozy-white !important;
   }
 
   section.row.td-box {
@@ -269,7 +269,7 @@ main.td-main {
       .community-item {
         flex: none;
 
-        border: 1px solid $flux-white;
+        border: 1px solid $cozy-white;
         padding: 0.5rem 1rem;
         margin: 1rem;
         width: 320px;

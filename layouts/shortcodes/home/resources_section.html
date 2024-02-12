@@ -1,0 +1,5 @@
+{{ $resources := $.Site.Data.resources.resources }}
+
+{{ range first 3 (where $resources "description" "!=" nil) }}
+    {{ partial "resource.html" . }}
+{{ end }}

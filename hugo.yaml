@@ -1,5 +1,5 @@
 baseURL: /
-title: Flux
+title: Cozystack
 enableRobotsTXT: true
 enableEmoji: true
 
@@ -90,29 +90,29 @@ outputs:
   page: [HTML, SearchIndex]
 
 params:
-  description: Open and extensible continuous delivery solution for Kubernetes.
-  copyright: The Flux authors
-  github_repo: https://github.com/fluxcd/website
-  github_branch: main
-  github_project_repo: https://github.com/fluxcd/flux2
-  slack: https://cloud-native.slack.com/messages/flux
+  description: Free and Open Source PaaS-platform for seamless management of virtual machines, managed Kubernetes, and Databases-as-a-Service
+  copyright: Ænix,
+  github_repo: https://github.com/aenix-io/cozystack-website
+  github_branch: master
+  github_project_repo: https://github.com/aenix-io/cozystack
+  #slack: https://cloud-native.slack.com/messages/cozystack
   support: /support
   images: [img/flux-social.png]
   # Enable Algolia DocSearch
-  algolia_docsearch: true
+  algolia_docsearch: false
   offlineSearch: false
   version_menu: "Versions"
-  version: "2.2"
+  version: "0.1"
   archived_version: false
   version_menu_pagelinks: true
-  url_latest_version: https://fluxcd.io/flux/
-  versions:
-    - version: "v2.2"
-      url: https://fluxcd.io
-    - version: "v2.1"
-      url: https://v2-1.docs.fluxcd.io
-    - version: "v2.0"
-      url: https://v2-0.docs.fluxcd.io
+  url_latest_version: https://cozystack.io/docs
+  #versions:
+  #  - version: "v2.2"
+  #    url: https://fluxcd.io
+  #  - version: "v2.1"
+  #    url: https://v2-1.docs.fluxcd.io
+  #  - version: "v2.0"
+  #    url: https://v2-0.docs.fluxcd.io
   logos:
     navbar: flux-horizontal-white.png
     hero: flux-horizontal-color.png
@@ -139,11 +139,11 @@ params:
     # End user relevant links. These will show up on left side of footer and in the community page if you have one.
     user:
       - name: Twitter
-        url: https://twitter.com/fluxcd
+        url: https://twitter.com/aenix_io
         icon: fab fa-twitter
         desc: Follow us on Twitter to get the latest news!
       - name: LinkedIn
-        url: https://linkedin.com/groups/8985374
+        url: https://www.linkedin.com/company/aenix-io
         icon: fab fa-linkedin
         desc: Join the Flux Community group on LinkedIn!
       - name: RSS Feed
@@ -151,78 +151,34 @@ params:
         icon: fa fa-rss
         desc: Subscribe to the RSS feed of our blog!
       - name: Support
-        url: /support
+        url: https://aenix.io/contact-us/
         icon: fas fa-comments
-        desc: Subscribe to the RSS feed of our blog!
+        desc: Get enterprise-grade support.
     # Developer relevant links. These will show up on right side of footer and in the community page if you have one.
     developer:
-      - name: Flux project on GitHub
-        url: https://github.com/fluxcd
+      - name: Cozystack project on GitHub
+        url: https://github.com/aenix-io/cozystack
         icon: fab fa-github
         desc: Development takes place here!
-      - name: Slack
-        url: https://cloud-native.slack.com/messages/flux
-        icon: fab fa-slack
+      #- name: Slack
+      #  url: https://kubernetes.slack.com/messages/cozystack
+      #  icon: fab fa-slack
+      #  desc: Chat with other project developers
+      - name: Telegram
+        url: https://t.me/cozystack/
+        icon: fab fa-telegram
         desc: Chat with other project developers
-      - name: Developer mailing list
-        url: https://lists.cncf.io/g/cncf-flux-dev
-        icon: fa fa-envelope
-        desc: Discuss development issues around the project
-      - name: Flux YouTube channel
-        url: https://youtube.com/@fluxcd
-        icon: fab fa-youtube
-        desc: Watch videos about Using Flux and Flux Development
+
 
 menus:
   main:
-  - name: Documentation
-    url: /flux
-    weight: 10
-  - name: Code of Conduct
-    parent: Project
-    url: https://github.com/fluxcd/community/blob/main/CODE_OF_CONDUCT.md
-    weight: 1
-  - name: Resources
-    parent: Project
-    url: /resources
+  - name: Ænix
+    url: https://aenix.io
     weight: 5
-  - name: Support
-    parent: Project
-    url: /support
+  - name: GitHub
+    url: https://github.com/aenix-io/cozystack
     weight: 10
-  - name: Community
-    parent: Project
-    url: /community
-    weight: 20
-  - name: Contributing
-    parent: Project
-    url: /contributing
-    weight: 30
-  - name: Governance
-    parent: Project
-    url: /governance
-    weight: 40
-  - name: Roadmap
-    parent: Project
-    url: /roadmap
-    weight: 50
-  - name: Security
-    parent: Project
-    url: /security
-    weight: 60
-  - name: Branding
-    parent: Project
-    url: https://github.com/cncf/artwork/blob/master/examples/graduated.md#flux-logos
-    weight: 9999
-  - name: Adopters
-    url: /adopters
-    weight: 80
-  - name: Ecosystem
-    url: /ecosystem
-    weight: 90
-  - name: Flagger
-    url: https://flagger.app
-    weight: 100
-  - identifier: Project
-    name: Project
-    weight: 110
+
+services:
+  googleAnalytics:
+    ID: G-XX2TEZM82F

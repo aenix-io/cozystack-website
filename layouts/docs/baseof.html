@@ -1,0 +1,46 @@
+<!doctype html>
+<html itemscope itemtype="http://schema.org/WebPage" lang="{{ .Site.Language.Lang }}" class="no-js">
+  <head>
+    {{ partial "head.html" . }}
+  </head>
+  <body class="td-{{ .Kind }}{{ with .Page.Params.body_class }} {{ . }}{{ end }}">
+    <header>
+      {{ partial "navbar.html" . }}
+    </header>
+    <div class="container-fluid td-outer">
+      <div class="td-main">
+        <div class="row flex-xl-nowrap">
+          <aside class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none">
+            {{ partial "sidebar.html" . }}
+          </aside>
+          <!-- hugeTable pages disable right sidebar: https://github.com/fluxcd/website/pull/281 -->
+          {{ if not .Params.hugeTable }}
+          <aside class="d-none d-xl-block col-xl-2 td-sidebar-toc d-print-none">
+            {{ partial "page-meta-links.html" . }}
+            {{ partial "toc.html" . }}
+<!--
+    Disabling because of https://github.com/google/docsy/issues/38
+
+    Essentially there is just one set of tags across /docs and /blog
+    So for now we disable showing the tag cloud, etc in our documentation.
+
+            {{ partial "taxonomy_terms_clouds.html" . }}
+-->
+          </aside>
+          {{ end }}
+          {{ if not .Params.hugeTable }}
+          <main class="col-12 col-md-9 col-xl-8 pl-md-5" role="main">
+          {{ else }}
+          <main class="col-12 col-md-12 col-xl-10 pl-md-5 " role="main">
+          {{ end }}
+            {{ partial "version-banner.html" . }}
+            {{ if not .Site.Params.ui.breadcrumb_disable }}{{ partial "breadcrumb.html" . }}{{ end }}
+            {{ block "main" . }}{{ end }}
+          </main>
+        </div>
+      </div>
+      {{ partial "footer.html" . }}
+    </div>
+    {{ partial "scripts.html" . }}
+  </body>
+</html>

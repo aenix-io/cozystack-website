@@ -1,0 +1,29 @@
+<h2 class="adopters-label">Adopted by</h2>
+<div id="adopters" class="carousel carousel-dark slide" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active" data-bs-interval="10000">
+      <div id="logos">
+        <div class="col">
+          <div class="scrollmenu">
+            {{ $companies := slice }}
+            {{ $projects := $.Site.Data.adopters }}
+            {{ range $projects }}
+              {{ range .adopters.companies }}
+                {{ $company := . }}
+                  {{ if not (in $companies $company) }}
+                    {{ $companies = $companies | append $company }}
+                  {{ end }}
+              {{ end }}
+            {{ end }}
+
+            {{ range $companies }}
+              {{ if .logo }}
+              <img src="/img/{{ .logo }}" alt="{{ .name }}" title="{{ .name }}">
+              {{ end }}
+            {{ end }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

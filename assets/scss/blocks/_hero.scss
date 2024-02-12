@@ -10,15 +10,7 @@
     padding: 0 15px;
   }
 
-  background: $flux-dark-blue;
-
-  background: radial-gradient(circle at bottom left, $flux-darkest-blue, rgba($flux-dark-blue, 0.5) 30vw, transparent 80vw),
-              linear-gradient(0deg, $flux-dark-blue, rgba($flux-darkest-blue, 0.3) 30px, rgba($flux-darkest-blue, 0.3) 150px, transparent 400px),
-              linear-gradient(0deg, $flux-dark-blue, transparent 200px),
-              radial-gradient(circle at top right, rgba($flux-light-blue, 0.8), rgba($flux-lighter-blue, 0.5) 40%, rgba($flux-dark-blue, 0.8) 50%, transparent),
-              repeating-linear-gradient(15deg, rgba($flux-darkest-blue, 0.3), rgba($flux-darkest-blue, 0.3) 2px,  rgba($flux-dark-blue, 0.3) 2px, rgba($flux-dark-blue, 0.3) 4px),
-              $flux-dark-blue;
-
+  background: $cozy-gray;
 
   .td-hero-block {
     padding-bottom: 4rem;
@@ -34,9 +26,9 @@
     margin-top: 1.5rem;
 
     p {
-      color: $flux-white;
+      color: $cozy-white;
       font-weight: 500;
-      font-size: 1.4rem;
+      font-size: 1.2rem;
     }
 
     p:first-child {
@@ -46,34 +38,35 @@
   }
 
   p {
-    color: $flux-white;
+    color: $cozy-white;
   }
 
   h1 {
-    color: rgba($flux-white, 0.95);
+    color: rgba($cozy-white, 0.95);
     font-size: 2.8em;
     padding-left: 14px;
+    padding-top: 50px;
 
     @include media-breakpoint-up(sm) {
-      font-size: 3.8em;
+      font-size: 2.6em;
     }
   }
 
   h2 {
-    color: rgba($flux-white, 0.95);
+    color: rgba($cozy-white, 0.95);
     font-weight: 600;
     font-size: 1.4em;
   }
 
   a {
-    color: $flux-light-blue !important;
+    color: $cozy-light-blue !important;
     font-weight: 400;
     font-style: italic;
     text-decoration: underline;
 
     &:hover {
-      color: $flux-darkest-blue !important;
-      text-shadow: -1px 1px $flux-lighter-blue;
+      color: $cozy-darkest-blue !important;
+      text-shadow: -1px 1px $cozy-lighter-blue;
     }
   }
 
@@ -109,7 +102,7 @@
   .td-arrow-down {
     &::before {
       border: {
-        color: #{$flux-dark-blue} transparent transparent transparent;
+        color: #{$cozy-gray} transparent transparent transparent;
       }
     }
   }

@@ -1,0 +1,19 @@
+# Node.js assets
+node_modules/
+
+# Hugo-generated assets
+.hugo_build.lock
+public/
+resources/
+
+# clone of gohugoio/hugo for docker-support
+hugo/
+
+# local GH token, used for some scripts
+.gh-token
+
+# build directories
+/bin
+
+# OSX .DS_Store
+.DS_Store
