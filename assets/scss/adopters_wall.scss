@@ -1,0 +1,60 @@
+@keyframes move {
+  0% {
+    margin-left: -9200px;
+  }
+  100% {
+    margin-left: 800px;
+  }
+}
+
+@media screen and (min-width: 900px) {
+  @keyframes move {
+    0% {
+      margin-left: -9100px;
+    }
+    100% {
+      margin-left: 800px;
+    }
+  }
+}
+
+
+.scrollmenu:hover {
+  animation-play-state: paused;
+}
+
+.scrollmenu {
+  height: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  animation-name: move;
+  animation-iteration-count: infinite;
+  animation-duration: 450s;
+  animation-direction: right;
+  animation-timing-function: linear;
+}
+
+.scrollmenu img {
+  display: inline-block;
+  color: white;
+  text-align: center;
+  height: 100%;
+  padding-right: 30px;
+  text-decoration: none;
+}
+
+.carousel-inner {
+  height: 100%;
+}
+
+.carousel-item .active {
+  height: 100%;
+}
+
+.scrollmenu img {
+  transition: 0.3s all ease-in-out;
+}
+
+.scrollmenu img:hover {
+  transform: scale(1.5);
+}

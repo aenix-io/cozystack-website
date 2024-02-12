@@ -1,0 +1,55 @@
+@if $enable-rounded {
+    .btn {
+        border-radius: $btn-border-radius;
+
+        &-lg {
+            border-radius: $btn-border-radius-lg;
+        }
+
+        &-sm {
+            border-radius: $btn-border-radius-sm;
+        }
+    }
+}
+
+@mixin flat-white-button {
+  color: $flux-mid-gray !important;
+  background-color: $flux-white !important;
+  border: none;
+
+  &:hover {
+    color: $flux-gray !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+
+  &:active {
+    box-shadow: none !important;
+  }
+
+  &:focus {
+    box-shadow: none !important;
+  }
+}
+
+@mixin projects-btn-primary {
+  a.btn-primary {
+    @include flat-white-button;
+
+    margin-right: 1rem;
+    padding-left: 1rem;
+
+    font-weight: 600 !important;
+  }
+}
+
+@mixin projects-btn-secondary {
+  a.btn-secondary {
+    @include flat-white-button;
+    background-color: $flux-light-blue !important;
+    color: $flux-gray !important;
+
+    margin-right: 1rem;
+    padding-left: 1rem;
+  }
+}

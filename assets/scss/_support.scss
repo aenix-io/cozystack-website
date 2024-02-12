@@ -1,0 +1,23 @@
+/* support page */
+
+.support {
+    .td-card-deck {
+        .card-body {
+            align-items: center;
+            display: flex;
+            justify-content: center;
+        }
+
+        img {
+            min-height: 80px;
+            margin: auto;
+            display: inline-block;
+        }
+
+    }
+
+    table td:nth-child(n+2) {
+        text-align: center;
+    }
+}
+

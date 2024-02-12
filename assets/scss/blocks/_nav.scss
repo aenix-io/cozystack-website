@@ -1,0 +1,86 @@
+// // override docsy styles
+nav.navbar {
+  background: $flux-black;
+
+  padding: 0;
+  @include media-breakpoint-down(md) {
+    padding: 10px;
+  }
+
+  .navbar-brand {
+    flex-grow: 1;
+    padding-bottom: 2px;
+
+    svg {
+      display: inline-block;
+      margin: 0 10px 0 -6px;
+      height: 30px;
+      @include media-breakpoint-up(lg) {
+        margin: 0 10px;
+      }
+    }
+  }
+
+  .navbar-nav {
+    margin-top: 0 !important;
+    overflow: visible !important;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    .nav-link {
+      font-size: 1rem;
+      text-transform: none;
+      font-weight: 700;
+
+      margin-top: 3px;
+    }
+  }
+
+  .nav-search-item {
+    height: 40px;
+
+    #docsearch {
+      height: 28px;
+      border: none;
+      max-width: 11rem;
+      padding-left: 9px;
+      margin-top: 4px;
+      @include media-breakpoint-down(md) {
+        max-width: 100%;
+        margin-right: 0;
+        padding-left: 0;
+        .DocSearch-Button {
+          margin-left: 0;
+          width: 100%;
+          .DocSearch-Button-Keys,
+          .DocSearch-Button-Placeholder {
+            display: block;
+            .DocSearch-Button-Key {
+              display: none;
+            }
+          }
+        }
+      }
+
+      margin-right: 1rem;
+    }
+  }
+}
+
+
+.td-sidebar-nav {
+  .td-sidebar-link.tree-root {
+    @include media-breakpoint-up(md) {
+      // https://github.com/fluxcd/website/pull/365#issuecomment-870876960
+      // maybe report upstream docsy and fix there?
+
+      margin-top: 1rem;
+    }
+  }
+
+  // some of the links looked "disabled" - maybe also report upstream?
+  .td-sidebar-link__page {
+    color: $gray-900;
+    font-weight: unset;
+  }
+}
