@@ -97,7 +97,7 @@ params:
   github_project_repo: https://github.com/aenix-io/cozystack
   #slack: https://cloud-native.slack.com/messages/cozystack
   support: /support
-  images: [img/flux-social.png]
+  images: [img/cozystack-social.png]
   # Enable Algolia DocSearch
   algolia_docsearch: false
   offlineSearch: false
@@ -113,11 +113,11 @@ params:
   #    url: https://v2-1.docs.fluxcd.io
   #  - version: "v2.0"
   #    url: https://v2-0.docs.fluxcd.io
-  logos:
-    navbar: flux-horizontal-white.png
-    hero: flux-horizontal-color.png
-    footer: flux-stacked-white.png
-    cncf: cncf-color.png
+  #logos:
+  #  navbar: flux-horizontal-white.png
+  #  hero: flux-horizontal-color.png
+  #  footer: flux-stacked-white.png
+  #  cncf: cncf-color.png
   ui:
     # Enable to show the side bar menu in its compact state.
     sidebar_menu_compact: true
@@ -181,4 +181,4 @@ menus:
 
 services:
   googleAnalytics:
-    ID: G-XX2TEZM82F
+    ID: G-7EH3PFQ5QR
