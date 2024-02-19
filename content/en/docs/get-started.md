@@ -217,7 +217,7 @@ Create namesapce and install Cozystack system components:
 ```bash
 kubectl create ns cozy-system
 kubectl apply -f cozystack-config.yaml
-kubectl apply -f manifests/cozystack-installer.yaml
+kubectl apply -f https://github.com/aenix-io/cozystack/raw/v0.1.0/manifests/cozystack-installer.yaml
 ```
 
 (optional) You can track the logs of installer:
@@ -305,9 +305,9 @@ example output:
 create storage pools:
 
 ```bash
-linstor ps cdp lvm srv1 /dev/sdb --pool-name data --storage-pool data
-linstor ps cdp lvm srv2 /dev/sdb --pool-name data --storage-pool data
-linstor ps cdp lvm srv3 /dev/sdb --pool-name data --storage-pool data
+linstor ps cdp zfs srv1 /dev/sdb --pool-name data --storage-pool data
+linstor ps cdp zfs srv2 /dev/sdb --pool-name data --storage-pool data
+linstor ps cdp zfs srv3 /dev/sdb --pool-name data --storage-pool data
 ```
 
 list storage pools:
@@ -325,9 +325,9 @@ example output:
 | DfltDisklessStorPool | srv1 | DISKLESS |          |              |               | False        | Ok    | srv1;DfltDisklessStorPool |
 | DfltDisklessStorPool | srv2 | DISKLESS |          |              |               | False        | Ok    | srv2;DfltDisklessStorPool |
 | DfltDisklessStorPool | srv3 | DISKLESS |          |              |               | False        | Ok    | srv3;DfltDisklessStorPool |
-| data                 | srv1 | LVM      | data     |   100.00 GiB |    100.00 GiB | False        | Ok    | srv1;data                 |
-| data                 | srv2 | LVM      | data     |   100.00 GiB |    100.00 GiB | False        | Ok    | srv2;data                 |
-| data                 | srv3 | LVM      | data     |   100.00 GiB |    100.00 GiB | False        | Ok    | srv3;data                 |
+| data                 | srv1 | ZFS      | data     |    96.41 GiB |     99.50 GiB | True         | Ok    | srv1;data                 |
+| data                 | srv2 | ZFS      | data     |    96.41 GiB |     99.50 GiB | True         | Ok    | srv2;data                 |
+| data                 | srv3 | ZFS      | data     |    96.41 GiB |     99.50 GiB | True         | Ok    | srv3;data                 |
 +-------------------------------------------------------------------------------------------------------------------------------------+
 ```
 
