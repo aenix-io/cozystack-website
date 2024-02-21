@@ -5,7 +5,9 @@ description: "Showcase various ways to get more information out of Flux controll
 weight: 60
 ---
 
-## Getting basic information
+## Cozystack
+
+### Getting basic information
 
 You can see the logs of main installer by executing:
 
@@ -78,3 +80,49 @@ and check the events again:
 ```bash
 kubectl describe hr -n cozy-dashboard dashboard
 ```
+
+## talos-bootstrap
+
+### No Talos nodes in maintenance mode found!
+
+If you encounter issues with the `talos-bootstrap` script not detecting any nodes, follow these steps to diagnose and resolve the issue:
+
+#### Verify Network Segment
+
+Ensure that you are running the script within the same network segment as the nodes. This is crucial for the script to be able to communicate with the nodes.
+
+#### Use Nmap to Discover Nodes
+
+Check if `nmap` can discover your node by running the following command:
+
+```bash
+nmap -Pn -n -p 50000 192.168.0.0/24
+```
+This command scans for nodes in the network that are listening on port 50000. The output should list all the nodes in the network segment that are listening on this port, indicating that they are reachable.
+
+#### Verify talosctl Connectivity
+
+Next, verify if talosctl can connect to a specific node, especially if it is in maintenance mode, using the command below:
+
+```bash
+talosctl -e "${node}" -n "${node}" get machinestatus -i
+```
+
+If you encounter errors similar to:
+
+```
+rpc error: code = Unimplemented desc = unknown service resource.ResourceService
+```
+
+
+This indicates that your version of `talosctl` is outdated. Updating `talosctl` to the latest version should resolve this issue.
+
+### Enable Debug Mode for talos-bootstrap
+
+If the above steps do not help, you can debug the `talos-bootstrap` script by running it in debug mode. This can provide more insights into what might be going wrong. Execute the script with the `-x` option to enable debug mode:
+
+```bash
+bash -x talos-bootstrap
+```
+
+Pay attention to the last command displayed before the error; it often indicates the command that failed and can provide clues for further troubleshooting.
