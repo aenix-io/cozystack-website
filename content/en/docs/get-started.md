@@ -305,11 +305,26 @@ example output:
 
 create storage pools:
 
+
+
+
+{{< tabs name="create_storage_pools" >}}
+{{% tab name="ZFS" %}}
 ```bash
 linstor ps cdp zfs srv1 /dev/sdb --pool-name data --storage-pool data
 linstor ps cdp zfs srv2 /dev/sdb --pool-name data --storage-pool data
 linstor ps cdp zfs srv3 /dev/sdb --pool-name data --storage-pool data
 ```
+{{% /tab %}}
+
+{{% tab name="LVM" %}}
+```bash
+linstor ps cdp lvm srv1 /dev/sdb --pool-name data --storage-pool data
+linstor ps cdp lvm srv2 /dev/sdb --pool-name data --storage-pool data
+linstor ps cdp lvm srv3 /dev/sdb --pool-name data --storage-pool data
+```
+{{% /tab %}}
+{{< /tabs >}}
 
 list storage pools:
 
