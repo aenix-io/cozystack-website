@@ -95,7 +95,7 @@ params:
   github_repo: https://github.com/aenix-io/cozystack-website
   github_branch: master
   github_project_repo: https://github.com/aenix-io/cozystack
-  #slack: https://cloud-native.slack.com/messages/cozystack
+  slack: https://cloud-native.slack.com/messages/cozystack
   support: /support
   images: [img/cozystack-social.png]
   # Enable Algolia DocSearch
@@ -160,10 +160,10 @@ params:
         url: https://github.com/aenix-io/cozystack
         icon: fab fa-github
         desc: Development takes place here!
-      #- name: Slack
-      #  url: https://kubernetes.slack.com/messages/cozystack
-      #  icon: fab fa-slack
-      #  desc: Chat with other project developers
+      - name: Slack
+        url: https://kubernetes.slack.com/messages/cozystack
+        icon: fab fa-slack
+        desc: Chat with other project developers
       - name: Telegram
         url: https://t.me/cozystack/
         icon: fab fa-telegram
