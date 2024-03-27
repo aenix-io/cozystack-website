@@ -46,34 +46,20 @@ By default (unless otherwise specified), it inherits the domain of its parent wi
 
 Kubernetes clusters created in this tenant namespace would get domains like: `kubernetes-cluster.foo.example.org`
 
-Example:
-```
-tenant-root (example.org)
-└── tenant-foo (foo.example.org)
-    └── kubernetes-cluster1 (kubernetes-cluster1.foo.example.org)
-```
+![tenant hierarchy](/img/tenants1.png)
 
-#### Lower-level tenants can access the cluster services of their parent (provided they do not run their own)
+#### Lower-level tenants can access the cluster services of their parent (in case they do not run their own)
 
-Thus, you can create `tenant-u1` with a set of services like `etcd`, `ingress`, `monitoring`. And create another tenant namespace `tenant-u2` inside of `tenant-u1`.
+By default there is `tenant-root` with a set of services like `etcd`, `ingress`, `monitoring`.
+You can create create another tenant namespace `tenant-foo` inside of `tenant-root` and even more `tenant-bar` inside of `tenant-foo`.
 
-Let's see what will happen when you run Kubernetes and Postgres under `tenant-u2` namesapce.
+Let's see what will happen when you run Kubernetes and Postgres under `tenant-bar` namesapce.
 
-Since `tenant-u2` does not have its own cluster services like `etcd`, `ingress`, and `monitoring`, the applications will use the cluster services of the parent tenant.  
+Since `tenant-bar` does not have its own cluster services like `ingress`, and `monitoring`, the applications will use the cluster services of the parent tenant.  
 This in turn means:
 
-- The Kubernetes cluster data will be stored in etcd for `tenant-u1`.
-- Access to the cluster will be through the common ingress of `tenant-u1`.
-- Essentially, all metrics will be collected in the monitoring from `tenant-u1`, and only it will have access to them.
+- The Kubernetes cluster data will be stored in etcd for `tenant-bar`.
+- All metrics will be collected in the monitoring from `tenant-foo`.
+- Access to the cluster will be through the common ingress of `tenant-root`.
 
-
-Example:
-```
-tenant-u1
-├── etcd
-├── ingress
-├── monitoring
-└── tenant-u2
-    ├── kubernetes-cluster1
-    └── postgres-db1
-```
+![tenant services](/img/tenants2.png)
