@@ -52,7 +52,7 @@ Any Linux system installed on it (eg. Ubuntu should be enough)
 Start matchbox with prebuilt Talos image for Cozystack:
 
 ```bash
-sudo docker run --name=matchbox -d --net=host ghcr.io/aenix-io/cozystack/matchbox:v0.0.2 \
+sudo docker run --name=matchbox -d --net=host ghcr.io/aenix-io/cozystack/matchbox:v0.2.0 \
   -address=:8080 \
   -log-level=debug
 ```
@@ -74,7 +74,7 @@ sudo docker run --name=dnsmasq -d --cap-add=NET_ADMIN --net=host quay.io/poseido
   --dhcp-match=set:efi64,option:client-arch,9 \
   --dhcp-boot=tag:efi64,ipxe.efi \
   --dhcp-userclass=set:ipxe,iPXE \
-  --dhcp-boot=tag:ipxe,http://192.168.100.254:8080/boot.ipxe \
+  --dhcp-boot=tag:ipxe,http://192.168.100.250:8080/boot.ipxe \
   --log-queries \
   --log-dhcp
 ```
@@ -82,7 +82,7 @@ sudo docker run --name=dnsmasq -d --cap-add=NET_ADMIN --net=host quay.io/poseido
 Where:
 - `192.168.100.3,192.168.100.254` range to allocate IPs from
 - `192.168.100.1` your gateway
-- `192.168.100.254` is address of your management server
+- `192.168.100.250` is address of your management server
 
 Check status of containers:
 
@@ -95,7 +95,7 @@ example output:
 ```console
 CONTAINER ID   IMAGE                                        COMMAND                  CREATED          STATUS          PORTS     NAMES
 22044f26f74d   quay.io/poseidon/dnsmasq                     "/usr/sbin/dnsmasq -…"   6 seconds ago    Up 5 seconds              dnsmasq
-231ad81ff9e0   ghcr.io/aenix-io/cozystack/matchbox:v0.0.2   "/matchbox -address=…"   58 seconds ago   Up 57 seconds             matchbox
+231ad81ff9e0   ghcr.io/aenix-io/cozystack/matchbox:v0.2.0   "/matchbox -address=…"   58 seconds ago   Up 57 seconds             matchbox
 ```
 
 ## Bootstrap cluster
@@ -205,7 +205,7 @@ metadata:
   name: cozystack
   namespace: cozy-system
 data:
-  cluster-name: "cozystack"
+  bundle-name: "paas-full"
   ipv4-pod-cidr: "10.244.0.0/16"
   ipv4-pod-gateway: "10.244.0.1"
   ipv4-svc-cidr: "10.96.0.0/16"
@@ -218,7 +218,7 @@ Create namesapce and install Cozystack system components:
 ```bash
 kubectl create ns cozy-system
 kubectl apply -f cozystack-config.yaml
-kubectl apply -f https://github.com/aenix-io/cozystack/raw/v0.1.0/manifests/cozystack-installer.yaml
+kubectl apply -f https://github.com/aenix-io/cozystack/raw/v0.2.0/manifests/cozystack-installer.yaml
 ```
 
 (optional) You can track the logs of installer:
@@ -240,7 +240,6 @@ cozy-cilium                      cilium                      4m1s   True    Rele
 cozy-cluster-api                 capi-operator               4m1s   True    Release reconciliation succeeded
 cozy-cluster-api                 capi-providers              4m1s   True    Release reconciliation succeeded
 cozy-dashboard                   dashboard                   4m1s   True    Release reconciliation succeeded
-cozy-fluxcd                      cozy-fluxcd                 4m1s   True    Release reconciliation succeeded
 cozy-grafana-operator            grafana-operator            4m1s   True    Release reconciliation succeeded
 cozy-kamaji                      kamaji                      4m1s   True    Release reconciliation succeeded
 cozy-kubeovn                     kubeovn                     4m1s   True    Release reconciliation succeeded
