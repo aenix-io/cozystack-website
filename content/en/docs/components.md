@@ -15,6 +15,10 @@ One of the key features of Kubernetes is a convenient and unified API that is un
 
 This fully solves the integration problem, since all existing virtualization platforms have an outdated and rather complex APIs that cannot be extended without modifying the source code. As a result, there is always a need to create your own custom solutions, which requires additional effort.
 
+### Flux CD
+
+We use FluxCD as the core element of our platform, believing it sets a new industry standard for platform engineering. FluxCD provides a simple and uniform interface for both installing and managing the lifecycle of all platform components.
+
 ### Talos Linux
 
 Using Talos Linux as the base layer for the platform allows to strictly limit the technology stack and make the system stable as a rock. 
