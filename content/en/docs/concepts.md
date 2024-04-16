@@ -63,3 +63,36 @@ This in turn means:
 - Access to the cluster will be through the common ingress of `tenant-root`.
 
 ![tenant services](/img/tenants2.png)
+
+## Bundles
+
+The Cozystack platform supports various deployment scenarios through a system of bundles.
+Each bundle is tailored for specific use cases and environments.
+
+Below are the example bundles:
+
+#### `paas-full`
+
+This is a Cozystack platform configuration intended for use as a PaaS platform, designed for installation on Talos Linux.
+It includes all available features, enabling a comprehensive PaaS experience.
+
+#### `paas-hosted`
+
+This is a Cozystack platform configuration intended for use as a PaaS platform, designed for installation on existing Kubernetes clusters.
+
+This configuration can be used with [kind](https://kind.sigs.k8s.io/) and any cloud-based Kubernetes clusters.
+It does not include CNI plugins, virtualization, or storage.
+
+#### `distro-full`
+
+This is a Cozystack platform configuration intended for use as a Kubernetes distribution, designed for installation on Talos Linux.
+
+This allows you to use Cozystack as a reliable Kubernetes distribution for bare metal.
+It includes storage but excludes virtualization and multitenancy features.
+
+#### `distro-hosted`
+
+This is a Cozystack platform configuration intended for use as a Kubernetes distribution, designed for installation on existing Kubernetes clusters.
+
+This configuration can be used with [kind](https://kind.sigs.k8s.io/) and any cloud-based Kubernetes clusters.
+It does not include CNI plugins, virtualization, storage, or multitenancy.
