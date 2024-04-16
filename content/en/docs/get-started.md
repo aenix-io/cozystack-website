@@ -191,7 +191,7 @@ kube-system       Active   7m56s
 
 ## Install Cozystack
 
-write config for cozystack:
+write config for cozystack, refer to [bundles](/docs/bundles/) documentation for configuration parameters
 
 {{% alert color="warning" %}}
 :warning: please make sure that you written the same setting specified in `patch.yaml` and `patch-controlplane.yaml` files.
