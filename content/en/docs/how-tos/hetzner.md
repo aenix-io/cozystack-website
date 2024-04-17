@@ -1,5 +1,5 @@
 ---
-title: How to install Cozystack in Hetnzer
+title: How to install Cozystack in Hetzner
 linkTitle: Hetzner
 description: "How to install Cozystack in Hetzner"
 weight: 10
