@@ -34,6 +34,12 @@ KubeVirt is a project started by global industry leaders with a common vision to
 
 At the moment, the KubeVirt project is being jointly developed by such world-famous companies as RedHat, NVIDIA, ARM.
 
+### Kamaji
+
+We use Kamaji to deploy user Kubernetes clusters. Kamaji provides a straightforward and convenient method for launching all the necessary Kubernetes control-plane in containers. Worker nodes are then connected to these control planes and handle user workloads.
+
+The approach developed by the Kamaji project is modeled after the design of modern clouds and ensures security by design where end users do not have any control plane nodes for their clusters.
+
 ### DRBD
 
 DRBD is the fastest replication block storage running right in the Linux kernel. When DRBD only deals with data replication, time-tested technologies such as LVM or ZFS are used for securely store the data.
