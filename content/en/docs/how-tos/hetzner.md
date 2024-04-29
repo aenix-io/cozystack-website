@@ -9,6 +9,12 @@ weight: 10
 :warning: Secure Boot is currently not supported.
 
 If your server configured to use Secure Boot, you need to disable this feature in your BIOS. Otherwise, it will block the server from booting after Talos Linux installation.
+
+```bash
+# mokutil --sb-state
+SecureBoot disabled
+Platform is in Setup Mode
+```
 {{% /alert %}}
 
 Switch your server into rescue mode
@@ -28,7 +34,7 @@ Download Talos Linux asset from the Cozystack's [releases page](https://github.c
 
 ```bash
 cd /tmp
-wget https://github.com/aenix-io/cozystack/releases/download/v0.2.0/metal-amd64.raw.xz
+wget https://github.com/aenix-io/cozystack/releases/latest/download/metal-amd64.raw.xz
 xz -d -c /tmp/metal-amd64.raw.xz | dd of=/dev/nvme0n1 bs=4M oflag=sync
 ```
 
