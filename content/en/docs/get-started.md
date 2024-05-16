@@ -52,7 +52,7 @@ Any Linux system installed on it (eg. Ubuntu should be enough)
 Start matchbox with prebuilt Talos image for Cozystack:
 
 ```bash
-sudo docker run --name=matchbox -d --net=host ghcr.io/aenix-io/cozystack/matchbox:v0.5.0 \
+sudo docker run --name=matchbox -d --net=host ghcr.io/aenix-io/cozystack/matchbox:v0.6.0 \
   -address=:8080 \
   -log-level=debug
 ```
@@ -95,7 +95,7 @@ example output:
 ```console
 CONTAINER ID   IMAGE                                        COMMAND                  CREATED          STATUS          PORTS     NAMES
 22044f26f74d   quay.io/poseidon/dnsmasq                     "/usr/sbin/dnsmasq -…"   6 seconds ago    Up 5 seconds              dnsmasq
-231ad81ff9e0   ghcr.io/aenix-io/cozystack/matchbox:v0.5.0   "/matchbox -address=…"   58 seconds ago   Up 57 seconds             matchbox
+231ad81ff9e0   ghcr.io/aenix-io/cozystack/matchbox:v0.6.0   "/matchbox -address=…"   58 seconds ago   Up 57 seconds             matchbox
 ```
 
 ## Bootstrap cluster
@@ -218,7 +218,7 @@ Create namesapce and install Cozystack system components:
 ```bash
 kubectl create ns cozy-system
 kubectl apply -f cozystack-config.yaml
-kubectl apply -f https://github.com/aenix-io/cozystack/raw/v0.5.0/manifests/cozystack-installer.yaml
+kubectl apply -f https://github.com/aenix-io/cozystack/raw/v0.6.0/manifests/cozystack-installer.yaml
 ```
 
 (optional) You can track the logs of installer:
