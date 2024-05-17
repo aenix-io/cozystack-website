@@ -2,7 +2,7 @@
 title: How to install Cozystack in Hetzner
 linkTitle: Hetzner
 description: "How to install Cozystack in Hetzner"
-weight: 10
+weight: 30
 ---
 
 {{% alert color="warning" %}}
@@ -92,13 +92,7 @@ sync
 reboot
 ```
 
-Now, when it is booted to Talos Linux maintenance mode, you can use [talos-bootstrap](https://github.com/aenix-io/talos-bootstrap) to bootstrap the cluster:
-
-```
-talos-bootstrap install -n 1.2.3.4
-```
-
-Where `1.2.3.4` is the IP-address of your remote node.
+Now, when it is booted to Talos Linux maintenance mode, you can use [talos-bootstrap](https://github.com/aenix-io/talos-bootstrap) or [Talm](https://github.com/aenix-io/talm) to bootstrap the cluster
 
 
-Now follow **Get Started** guide starting from the [**Bootstrap cluster**](/docs/get-started/#bootstrap-cluster) section, to continue the installation.
+Just follow **Get Started** guide starting from the [**Bootstrap cluster**](/docs/get-started/#bootstrap-cluster) section, to continue the installation.
