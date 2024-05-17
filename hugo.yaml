@@ -93,7 +93,7 @@ params:
   description: Free and Open Source PaaS-platform for seamless management of virtual machines, managed Kubernetes, and Databases-as-a-Service
   copyright: Ænix,
   github_repo: https://github.com/aenix-io/cozystack-website
-  github_branch: master
+  github_branch: main
   github_project_repo: https://github.com/aenix-io/cozystack
   slack: https://cloud-native.slack.com/messages/cozystack
   support: /support
