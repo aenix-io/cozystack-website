@@ -100,7 +100,7 @@ spec:
 
 Sometimes you might want to flush the etcd state from a node. You can use the following command:
 
-```
+```bash
 talosctl reset --system-labels-to-wipe=EPHEMERAL --graceful=false --reboot
 ```
 
@@ -108,3 +108,25 @@ talosctl reset --system-labels-to-wipe=EPHEMERAL --graceful=false --reboot
 :warning: This command will remove the state from the specified node. Use it with caution.
 {{% /alert %}}
 
+
+#### How to generate kubeconfig for tenant users
+
+Use the following script:
+
+```bash
+user=tenant-root
+
+cluster=$(kubectl config get-contexts | awk '$1 == "*" {print $3}')
+token=$(kubectl get secret -n "$user" "$user" -o go-template='{{ printf "%s\n" (index .data "token" | base64decode) }}')
+
+kubectl config view --minify --raw > tenant-kubeconfig
+kubectl config --kubeconfig tenant-kubeconfig unset users
+kubectl config --kubeconfig tenant-kubeconfig unset contexts
+kubectl config --kubeconfig tenant-kubeconfig set "users.$user.token" "$token"  --set-raw-bytes=true
+kubectl config --kubeconfig tenant-kubeconfig set "contexts.$user@$cluster.user" "$user"
+kubectl config --kubeconfig tenant-kubeconfig set "contexts.$user@$cluster.namespace" "$user"
+kubectl config --kubeconfig tenant-kubeconfig set "contexts.$user@$cluster.cluster" "$cluster"
+kubectl config --kubeconfig tenant-kubeconfig set current-context "$user@$cluster"
+```
+
+in the result, you’ll receive the tenant-kubeconfig file, which you can provide to the user.
