@@ -11,6 +11,39 @@ Troubleshooting advice can be found on our [Troubleshooting Cheatsheet](/docs/tr
 
 ## General questions
 
+#### How to enable access to dashboard via ingres-controller
+
+Just create an ingress resource to publish dashboard via `tenant-root-ingress-controller`:
+
+```yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    kubernetes.io/ingress.class: tenant-root
+    acme.cert-manager.io/http01-ingress-class: tenant-root
+  name: dashboard-ingress
+  namespace: cozy-dashboard
+spec:
+  ingressClassName: tenant-root
+  rules:
+  - host: demo.cozystack.io
+    http:
+      paths:
+      - backend:
+          service:
+            name: dashboard
+            port:
+              number: 80
+        path: /
+        pathType: Prefix
+  tls:
+  - hosts:
+    - demo.cozystack.io
+    secretName: dashboard-ingress-tls
+```
+
 ### Bundles
 
 #### How to overwrite parameters for specific components
