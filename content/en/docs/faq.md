@@ -60,3 +60,73 @@ data:
 {{% alert color="warning" %}}
 :warning: Disabling components using this option will not remove them if they are already installed. To remove them, you must delete the Helm release manually using the `kubectl delete hr -n <namespace> <component>` command.
 {{% /alert %}}
+
+### Operations
+
+#### How to enable access to dashboard via ingres-controller
+
+Just create an ingress resource to publish dashboard via `tenant-root-ingress-controller`:
+
+```yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    kubernetes.io/ingress.class: tenant-root
+    acme.cert-manager.io/http01-ingress-class: tenant-root
+  name: dashboard-ingress
+  namespace: cozy-dashboard
+spec:
+  ingressClassName: tenant-root
+  rules:
+  - host: demo.cozystack.io
+    http:
+      paths:
+      - backend:
+          service:
+            name: dashboard
+            port:
+              number: 80
+        path: /
+        pathType: Prefix
+  tls:
+  - hosts:
+    - demo.cozystack.io
+    secretName: dashboard-ingress-tls
+```
+
+#### How to cleanup etcd state
+
+Sometimes you might want to flush the etcd state from a node. You can use the following command:
+
+```bash
+talosctl reset --system-labels-to-wipe=EPHEMERAL --graceful=false --reboot
+```
+
+{{% alert color="warning" %}}
+:warning: This command will remove the state from the specified node. Use it with caution.
+{{% /alert %}}
+
+
+#### How to generate kubeconfig for tenant users
+
+Use the following script:
+
+```bash
+user=tenant-root
+
+cluster=$(kubectl config get-contexts | awk '$1 == "*" {print $3}')
+token=$(kubectl get secret -n "$user" "$user" -o go-template='{{ printf "%s\n" (index .data "token" | base64decode) }}')
+
+kubectl config view --minify --raw > tenant-kubeconfig
+kubectl config --kubeconfig tenant-kubeconfig unset users
+kubectl config --kubeconfig tenant-kubeconfig unset contexts
+kubectl config --kubeconfig tenant-kubeconfig set "users.$user.token" "$token"  --set-raw-bytes=true
+kubectl config --kubeconfig tenant-kubeconfig set "contexts.$user@$cluster.user" "$user"
+kubectl config --kubeconfig tenant-kubeconfig set "contexts.$user@$cluster.namespace" "$user"
+kubectl config --kubeconfig tenant-kubeconfig set "contexts.$user@$cluster.cluster" "$cluster"
+kubectl config --kubeconfig tenant-kubeconfig set current-context "$user@$cluster"
+```
+
+in the result, you’ll receive the tenant-kubeconfig file, which you can provide to the user.
