@@ -21,7 +21,7 @@ HDD1: 32 GB
 HDD2: 100GB (raw)
 ```
 
-And one management VM or physical server connected to the same network.
+And in case of PXE installation one management VM or physical server connected to the same network.
 Any Linux system installed on it (eg. Ubuntu should be enough)
 
 {{% alert color="warning" %}}
@@ -30,140 +30,29 @@ Any Linux system installed on it (eg. Ubuntu should be enough)
 
 ## Objectives
 
-- Bootstrap Cozystack on three servers using PXE
+- Bootstrap Cozystack on three servers
 - Configure Storage
 - Configure Networking interconnection
 - Access Cozystack dashboard
 - Deploy etcd, ingress and monitoring stack
 
-## Install dependencies:
 
-- `docker`
-- `talosctl`
-- `dialog`
-- `nmap`
-- `make`
-- `yq`
-- `kubectl`
-- `helm`
+## Talos Linux Installation
 
-## Netboot server
 
-Start matchbox with prebuilt Talos image for Cozystack:
+Follow one of the guide to boot your machines with Talos Linux image:
 
-```bash
-sudo docker run --name=matchbox -d --net=host ghcr.io/aenix-io/cozystack/matchbox:v0.6.0 \
-  -address=:8080 \
-  -log-level=debug
-```
+- [**PXE**](/docs/talos/installation/pxe/) - for installation using temporary DHCP and PXE servers running as Docker containers.
+- [**ISO**](/docs/talos/installation/iso/) - for installation using ISO-file.
+- [**Hetzner**](/docs/talos/installation/hetzner/) - for installation on Hetzner servers.
 
-Start DHCP-Server:
-```bash
-sudo docker run --name=dnsmasq -d --cap-add=NET_ADMIN --net=host quay.io/poseidon/dnsmasq \
-  -d -q -p0 \
-  --dhcp-range=192.168.100.3,192.168.100.254 \
-  --dhcp-option=option:router,192.168.100.1 \
-  --enable-tftp \
-  --tftp-root=/var/lib/tftpboot \
-  --dhcp-match=set:bios,option:client-arch,0 \
-  --dhcp-boot=tag:bios,undionly.kpxe \
-  --dhcp-match=set:efi32,option:client-arch,6 \
-  --dhcp-boot=tag:efi32,ipxe.efi \
-  --dhcp-match=set:efibc,option:client-arch,7 \
-  --dhcp-boot=tag:efibc,ipxe.efi \
-  --dhcp-match=set:efi64,option:client-arch,9 \
-  --dhcp-boot=tag:efi64,ipxe.efi \
-  --dhcp-userclass=set:ipxe,iPXE \
-  --dhcp-boot=tag:ipxe,http://192.168.100.250:8080/boot.ipxe \
-  --log-queries \
-  --log-dhcp
-```
-
-Where:
-- `192.168.100.3,192.168.100.254` range to allocate IPs from
-- `192.168.100.1` your gateway
-- `192.168.100.250` is address of your management server
-
-Check status of containers:
-
-```
-docker ps
-```
-
-example output:
-
-```console
-CONTAINER ID   IMAGE                                        COMMAND                  CREATED          STATUS          PORTS     NAMES
-22044f26f74d   quay.io/poseidon/dnsmasq                     "/usr/sbin/dnsmasq -…"   6 seconds ago    Up 5 seconds              dnsmasq
-231ad81ff9e0   ghcr.io/aenix-io/cozystack/matchbox:v0.6.0   "/matchbox -address=…"   58 seconds ago   Up 57 seconds             matchbox
-```
 
 ## Bootstrap cluster
 
-Write configuration for Cozystack:
+Follow the guide to bootstrap your Talos Linux cluster using one of the following tools:
 
-```yaml
-cat > patch.yaml <<\EOT
-machine:
-  kubelet:
-    nodeIP:
-      validSubnets:
-      - 192.168.100.0/24
-  kernel:
-    modules:
-    - name: openvswitch
-    - name: drbd
-      parameters:
-        - usermode_helper=disabled
-    - name: zfs
-    - name: spl
-  install:
-    image: ghcr.io/aenix-io/cozystack/talos:v1.6.4
-  files:
-  - content: |
-      [plugins]
-        [plugins."io.containerd.grpc.v1.cri"]
-          device_ownership_from_security_context = true
-    path: /etc/cri/conf.d/20-customization.part
-    op: create
-
-cluster:
-  network:
-    cni:
-      name: none
-    podSubnets:
-    - 10.244.0.0/16
-    serviceSubnets:
-    - 10.96.0.0/16
-EOT
-
-cat > patch-controlplane.yaml <<\EOT
-cluster:
-  allowSchedulingOnControlPlanes: true
-  controllerManager:
-    extraArgs:
-      bind-address: 0.0.0.0
-  scheduler:
-    extraArgs:
-      bind-address: 0.0.0.0
-  apiServer:
-    certSANs:
-    - 127.0.0.1
-  proxy:
-    disabled: true
-  discovery:
-    enabled: false
-  etcd:
-    advertisedSubnets:
-    - 192.168.100.0/24
-EOT
-```
-
-Run [talos-bootstrap](https://github.com/aenix-io/talos-bootstrap/) to deploy cluster:
-
-```bash
-talos-bootstrap install
-```
+- [**talos-bootstrap**](/docs/talos/configuration/talos-bootstrap/) - for a quick walkthrough
+- [**Talm**](/docs/talos/configuration/talm/) - for declarative cluster management
 
 Save admin kubeconfig to access your Kubernetes cluster:
 ```bash
