@@ -63,8 +63,10 @@ CONTAINER ID   IMAGE                                        COMMAND             
 231ad81ff9e0   ghcr.io/aenix-io/cozystack/matchbox:v0.6.0   "/matchbox -address=…"   58 seconds ago   Up 57 seconds             matchbox
 ```
 
+Start your servers, now they should automatically boot from your PXE server.
 
-Now, when it is booted to Talos Linux maintenance mode, you can use [talos-bootstrap](https://github.com/aenix-io/talos-bootstrap) or [Talm](https://github.com/aenix-io/talm) to bootstrap the cluster
+
+Now, when they are booted to Talos Linux maintenance mode, you can use [talos-bootstrap](https://github.com/aenix-io/talos-bootstrap) or [Talm](https://github.com/aenix-io/talm) to bootstrap the cluster
 
 
 Just follow **Get Started** guide starting from the [**Bootstrap cluster**](/docs/get-started/#bootstrap-cluster) section, to continue the installation.
