@@ -17,7 +17,7 @@ weight: 10
 Start matchbox with prebuilt Talos image for Cozystack:
 
 ```bash
-sudo docker run --name=matchbox -d --net=host ghcr.io/aenix-io/cozystack/matchbox:v0.6.0 \
+sudo docker run --name=matchbox -d --net=host ghcr.io/aenix-io/cozystack/matchbox:v0.7.0 \
   -address=:8080 \
   -log-level=debug
 ```
@@ -60,7 +60,7 @@ example output:
 ```console
 CONTAINER ID   IMAGE                                        COMMAND                  CREATED          STATUS          PORTS     NAMES
 22044f26f74d   quay.io/poseidon/dnsmasq                     "/usr/sbin/dnsmasq -…"   6 seconds ago    Up 5 seconds              dnsmasq
-231ad81ff9e0   ghcr.io/aenix-io/cozystack/matchbox:v0.6.0   "/matchbox -address=…"   58 seconds ago   Up 57 seconds             matchbox
+231ad81ff9e0   ghcr.io/aenix-io/cozystack/matchbox:v0.7.0   "/matchbox -address=…"   58 seconds ago   Up 57 seconds             matchbox
 ```
 
 Start your servers, now they should automatically boot from your PXE server.
