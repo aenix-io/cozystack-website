@@ -30,13 +30,34 @@ The structure of the project mostly mirrors an ordinary Helm chart:
 
 You're free to edit the files: `Chart.yaml`, `values.yaml`, and `templates/*` to meet your environment requirements.
 
+Be aware that your nodes are booted Talos Linux image and awaiting in maintenance mode
+
+{{% alert color="info" %}}
+If you are using DHCP, you might not be aware of the IP addresses assigned to your nodes.\
+You can use nmap to find them all:
+
+```bash
+nmap -Pn -n -p 50000 192.168.100.0/24 -vv | grep 'Discovered'
+```
+
+Where `192.168.100.0/24` is your network.
+
+Example output:
+
+```
+Discovered open port 50000/tcp on 192.168.100.63
+Discovered open port 50000/tcp on 192.168.100.159
+Discovered open port 50000/tcp on 192.168.100.192
+```
+{{% /alert %}}
+
 Now, create a nodes directory and collect the information from your node into a specific file:
 
 ```bash
-talm template -e 1.2.3.4 -n 1.2.3.4 -t templates/controlplane.yaml -i > nodes/srv1.yaml
+talm template -e 192.168.100.63 -n 192.168.100.63 -t templates/controlplane.yaml -i > nodes/srv1.yaml
 ```
 
-Where `1.2.3.4` is the IP address of your remote node.
+Where `192.168.100.63` is the IP address of your node.
 
 Check the generated file, and if everything is okay, apply it:
 
