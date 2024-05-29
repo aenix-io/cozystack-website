@@ -57,6 +57,7 @@ cluster:
   network:
     cni:
       name: none
+    dnsDomain: cozy.local
     podSubnets:
     - 10.244.0.0/16
     serviceSubnets:
