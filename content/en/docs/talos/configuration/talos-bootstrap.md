@@ -33,6 +33,8 @@ machine:
     nodeIP:
       validSubnets:
       - 192.168.100.0/24
+    extraConfig:
+      maxPods: 512
   kernel:
     modules:
     - name: openvswitch
