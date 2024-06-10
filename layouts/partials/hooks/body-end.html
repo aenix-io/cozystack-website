@@ -1,0 +1,21 @@
+<!-- Algolia changes: https://github.com/fluxcd/website/pull/936 -->
+{{ if isset .Site.Params "algolia_docsearch" }}
+<script src="https://cdn.jsdelivr.net/npm/@docsearch/js@3"></script>
+<script type="text/javascript">
+  docsearch({
+    container: "#docsearch",
+    apiKey: "1d95c96f95e8a2cab60b046ceae06050",
+    appId: "BFRW7INMAD",
+    indexName: "cozystack",
+  });
+
+  for (const e of document.querySelectorAll(".docsearch-placeholder")) {
+    docsearch({
+      container: e,
+      apiKey: "1d95c96f95e8a2cab60b046ceae06050",
+      appId: "BFRW7INMAD",
+      indexName: "cozystack",
+    });
+  }
+</script>
+{{ end }}
