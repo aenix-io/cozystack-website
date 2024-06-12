@@ -24,7 +24,7 @@ sudo docker run --name=matchbox -d --net=host ghcr.io/aenix-io/cozystack/matchbo
 
 Start DHCP-Server:
 ```bash
-sudo docker run --name=dnsmasq -d --cap-add=NET_ADMIN --net=host quay.io/poseidon/dnsmasq \
+sudo docker run --name=dnsmasq -d --cap-add=NET_ADMIN --net=host quay.io/poseidon/dnsmasq:v0.5.0-32-g4327d60-amd64 \
   -d -q -p0 \
   --dhcp-range=192.168.100.3,192.168.100.254 \
   --dhcp-option=option:router,192.168.100.1 \
@@ -58,9 +58,9 @@ docker ps
 example output:
 
 ```console
-CONTAINER ID   IMAGE                                        COMMAND                  CREATED          STATUS          PORTS     NAMES
-22044f26f74d   quay.io/poseidon/dnsmasq                     "/usr/sbin/dnsmasq -…"   6 seconds ago    Up 5 seconds              dnsmasq
-231ad81ff9e0   ghcr.io/aenix-io/cozystack/matchbox:v0.7.0   "/matchbox -address=…"   58 seconds ago   Up 57 seconds             matchbox
+CONTAINER ID   IMAGE                                               COMMAND                  CREATED          STATUS          PORTS     NAMES
+06115f09e689   quay.io/poseidon/dnsmasq:v0.5.0-32-g4327d60-amd64   "/usr/sbin/dnsmasq -…"   47 seconds ago   Up 46 seconds             dnsmasq
+6bf638f0808e   ghcr.io/aenix-io/cozystack/matchbox:v0.7.0          "/matchbox -address=…"   3 minutes ago    Up 3 minutes              matchbox
 ```
 
 Start your servers, now they should automatically boot from your PXE server.
