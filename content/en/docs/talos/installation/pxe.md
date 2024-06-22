@@ -26,7 +26,7 @@ Start DHCP-Server:
 ```bash
 sudo docker run --name=dnsmasq -d --cap-add=NET_ADMIN --net=host quay.io/poseidon/dnsmasq:v0.5.0-32-g4327d60-amd64 \
   -d -q -p0 \
-  --dhcp-range=192.168.100.3,192.168.100.254 \
+  --dhcp-range=192.168.100.3,192.168.100.199 \
   --dhcp-option=option:router,192.168.100.1 \
   --enable-tftp \
   --tftp-root=/var/lib/tftpboot \
@@ -39,15 +39,15 @@ sudo docker run --name=dnsmasq -d --cap-add=NET_ADMIN --net=host quay.io/poseido
   --dhcp-match=set:efi64,option:client-arch,9 \
   --dhcp-boot=tag:efi64,ipxe.efi \
   --dhcp-userclass=set:ipxe,iPXE \
-  --dhcp-boot=tag:ipxe,http://192.168.100.250:8080/boot.ipxe \
+  --dhcp-boot=tag:ipxe,http://192.168.100.254:8080/boot.ipxe \
   --log-queries \
   --log-dhcp
 ```
 
 Where:
-- `192.168.100.3,192.168.100.254` range to allocate IPs from
+- `192.168.100.3,192.168.100.199` range to allocate IPs from
 - `192.168.100.1` your gateway
-- `192.168.100.250` is address of your management server
+- `192.168.100.254` is address of your management server
 
 Check status of containers:
 
