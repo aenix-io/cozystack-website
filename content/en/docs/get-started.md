@@ -102,7 +102,7 @@ data:
 EOT
 ```
 
-Create namesapce and install Cozystack system components:
+Create namespace and install Cozystack system components:
 
 ```bash
 kubectl create ns cozy-system
