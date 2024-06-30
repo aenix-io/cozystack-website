@@ -288,6 +288,10 @@ replicated        linstor.csi.linbit.com   Delete          WaitForFirstConsumer 
 
 ## Configure Networking interconnection
 
+{{% alert color="info" %}}
+If you plan to use an external load balancer or a client-side balancer to access your services through the same IPs for your nodes, you can skip this step
+{{% /alert %}}
+
 To access your services select the range of unused IPs, eg. `192.168.100.200-192.168.100.250`
 
 {{% alert color="warning" %}}
@@ -346,6 +350,10 @@ Open: http://localhost:8000/
 
 - Set `etcd`, `monitoring` and `ingress` to enabled position
 - Click Deploy
+
+{{% alert color="info" %}}
+If you plan to use an external load balancer or a client-side balancer to access your services through the same IPs for your nodes, you have to modify `ingress` application to specify these IPs in `externalIPs`.
+{{% /alert %}}
 
 
 Check persistent volumes provisioned:
