@@ -35,7 +35,7 @@ Download Talos Linux asset from the Cozystack's [releases page](https://github.c
 ```bash
 cd /tmp
 wget https://github.com/aenix-io/cozystack/releases/latest/download/nocloud-amd64.raw.xz
-xz -d -c /tmp/metal-amd64.raw.xz | dd of=/dev/nvme0n1 bs=4M oflag=sync
+xz -d -c /tmp/nocloud-amd64.raw.xz | dd of=/dev/nvme0n1 bs=4M oflag=sync
 ```
 
 Resize the partition table and prepare additional partition for the cloud-init data:
