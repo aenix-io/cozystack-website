@@ -110,6 +110,11 @@ kubectl apply -f cozystack-config.yaml
 kubectl apply -f https://github.com/aenix-io/cozystack/raw/v0.9.0/manifests/cozystack-installer.yaml
 ```
 
+If your pods have status "Pending"
+```bash
+kubectl taint nodes --all node-role.kubernetes.io/control-plane-
+```
+
 (optional) You can track the logs of installer:
 ```bash
 kubectl logs -n cozy-system deploy/cozystack -f
