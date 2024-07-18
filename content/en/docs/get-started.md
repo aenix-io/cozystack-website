@@ -268,7 +268,7 @@ parameters:
   property.linstor.csi.linbit.com/DrbdOptions/Resource/on-no-data-accessible: suspend-io
   property.linstor.csi.linbit.com/DrbdOptions/Resource/on-suspended-primary-outdated: force-secondary
   property.linstor.csi.linbit.com/DrbdOptions/Net/rr-conflict: retry-connect
-volumeBindingMode: WaitForFirstConsumer
+volumeBindingMode: Immediate
 allowVolumeExpansion: true
 EOT
 ```
