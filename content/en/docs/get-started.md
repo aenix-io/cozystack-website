@@ -110,6 +110,15 @@ kubectl apply -f cozystack-config.yaml
 kubectl apply -f https://github.com/aenix-io/cozystack/raw/v0.9.0/manifests/cozystack-installer.yaml
 ```
 
+{{% alert color="info" %}}
+Currenlty Cozytack does not separate control-plane and worker nodes, so if your nodes have control-plane taint, pods will stuck in `Pending` status.  
+
+You have to remove control-plane taint from the nodes:
+```bash
+kubectl taint nodes --all node-role.kubernetes.io/control-plane-
+```
+{{% /alert %}}
+
 (optional) You can track the logs of installer:
 ```bash
 kubectl logs -n cozy-system deploy/cozystack -f
