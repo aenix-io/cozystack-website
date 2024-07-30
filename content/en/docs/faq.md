@@ -102,3 +102,9 @@ kubectl config --kubeconfig tenant-kubeconfig set current-context "$user@$cluste
 ```
 
 in the result, you’ll receive the tenant-kubeconfig file, which you can provide to the user.
+
+#### How to configure Cozystack using FluxCD or ArgoCD
+
+Here you can find reference repository to learn how to configure Cozystack services using GitOps approach:
+
+- https://github.com/aenix-io/cozystack-gitops-example
