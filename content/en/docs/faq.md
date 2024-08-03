@@ -63,7 +63,7 @@ data:
 
 ### Operations
 
-#### How to enable access to dashboard via ingres-controller
+#### How to enable access to dashboard via ingress-controller
 
 Update your `ingress` application and enable `dashboard: true` option in it.  
 Dashboard will become available under: `https://dashboard.<your_domain>`
