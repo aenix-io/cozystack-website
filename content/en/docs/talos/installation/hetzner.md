@@ -30,57 +30,68 @@ nvme0n1     259:4    0 476.9G  0 disk
 nvme1n1     259:0    0 476.9G  0 disk
 ```
 
+Set environment variable:
+```bash
+DISK=$(lsblk -dn -o NAME,SIZE,TYPE -e 1,7,11,14,15 | sed -n 1p | awk '{print $1}')
+
+echo "DISK=$DISK"
+```
+
 Download Talos Linux asset from the Cozystack's [releases page](https://github.com/aenix-io/cozystack/releases), and write it into disk:
 
 ```bash
 cd /tmp
 wget https://github.com/aenix-io/cozystack/releases/latest/download/nocloud-amd64.raw.xz
-xz -d -c /tmp/nocloud-amd64.raw.xz | dd of=/dev/nvme0n1 bs=4M oflag=sync
+xz -d -c /tmp/nocloud-amd64.raw.xz | dd of="/dev/$DISK" bs=4M oflag=sync
 ```
 
 Resize the partition table and prepare additional partition for the cloud-init data:
 
 ```bash
 # resize gpt partition
-sgdisk -e /dev/nvme0n1
+sgdisk -e "/dev/$DISK"
 
 # Create 20MB partition in the end of disk
-end=$(sgdisk -E /dev/nvme0n1)
-sgdisk -n7:$(( $end - 40960 )):$end -t7:ef00 /dev/nvme0n1
+end=$(sgdisk -E "/dev/$DISK")
+sgdisk -n7:$(( $end - 40960 )):$end -t7:ef00 "/dev/$DISK"
 
-# Create fat partion for cloud-init
-mkfs.vfat -n CIDATA /dev/nvme0n1p7
-
-# Mount cloud-init partition
-mount  /dev/nvme0n1p7 /mnt
+# Create FAT filesystem for cloud-init and mount it
+PARTITION=$(sfdisk -d "/dev/$DISK" | awk 'END{print $1}' | awk -F/ '{print $NF}')
+mkfs.vfat -n CIDATA "/dev/$PARTITION"
+mount  "/dev/$PARTITION" /mnt
 ```
 
-Write cloud-init configuration
+Set environment variables:
 
 ```bash
-echo 'local-hostname: us-talos-1' > /mnt/meta-data
+INTERFACE_NAME=$(udevadm info -q property /sys/class/net/eth0 | grep "ID_NET_NAME_PATH=" | cut -d'=' -f2)
+IP_CIDR=$(ip addr show eth0 | grep "inet\b" | awk '{print $2}')
+GATEWAY=$(ip route | grep default | awk '{print $3}')
+
+echo "INTERFACE_NAME=$INTERFACE_NAME"
+echo "IP_CIDR=$IP_CIDR"
+echo "GATEWAY=$GATEWAY"
+```
+
+Write cloud-init configuration:
+
+```bash
+echo 'local-hostname: talos' > /mnt/meta-data
 echo '#cloud-config' > /mnt/user-data
-echo 'version: 2' > /mnt/network-config
+cat > /mnt/network-config <<EOT
+version: 2
+ethernets:
+  $INTERFACE_NAME:
+    dhcp4: false
+    addresses:
+      - "${IP_CIDR}"
+    gateway4: "${GATEWAY}"
+    nameservers:
+      addresses: [8.8.8.8]
+EOT
 ```
 
 Edit network-config and specify your network settings using [network-config-format-v2](https://cloudinit.readthedocs.io/en/latest/reference/network-config-format-v2.html).
-
-```yaml
-version: 2
-ethernets:
-  eth0:
-    match:
-      macaddress: 'a6:34:9e:c0:25:6b'
-    dhcp4: false
-    addresses:
-      - "1.2.3.4/26"
-      - "2a01:4f3:341:524::2/64"
-    gateway4: "1.2.3.1"
-    gateway6: "fe80::1"
-    nameservers:
-      search: [cluster.local]
-      addresses: [8.8.8.8]
-```
 
 You can find more comprehensive example under the [link](https://github.com/siderolabs/talos/blob/10f958cf41ec072209f8cb8724e6f89db24ca1b6/internal/app/machined/pkg/runtime/v1alpha1/platform/nocloud/testdata/metadata-v2.yaml)
 
