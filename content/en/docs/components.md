@@ -109,6 +109,10 @@ ClickHouse is an open source high-performance and column-oriented SQL database m
 
 Widely known message broker. Platform-side implementation allows you to create failover clusters managed by the official RabbitMQ operator.
 
+### Managed Kafka
+
+Apache Kafka is an open-source distributed event streaming platform that aims to provide a unified, high-throughput, low-latency platform for handling real-time data feeds. In the Cozystack we use Strimzi to run an Apache Kafka cluster on Kubernetes in various deployment configurations.
+
 ### Managed HTTP Cache
 
 Nginx-based HTTP caching service - with its help you can always protect your application from overload using the powerful Nginx, which is traditionally used to build CDNs and caching servers.
