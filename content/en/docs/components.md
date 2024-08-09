@@ -75,6 +75,10 @@ MetalLB is the default load balancer for Kubernetes; with its help, your service
 
 HAProxy is an advanced and widely known TCP balancer. It continuously checks the availability of services and carefully balance production traffic between them in real time.
 
+### SeaweedFS
+
+SeaweedFS is a simple and highly scalable distributed file system designed for two main objectives: to store billions of files and to serve the files faster. It allows access O(1), usually just one disk read operation.
+
 
 ## Application stack
 
@@ -93,6 +97,14 @@ MySQL is an equally well-known and also widely used relational database. The imp
 
 Redis is the most commonly used key-value in-memory data store. It is most often used as a cache, as storage for user sessions, or as a message broker. The platform-side implementation involves a replicated failover Redis cluster with Sentinel, which is managed by the spotahome redis-operator.
 
+### Managed FerretDB
+
+FerretDB is an open source MongoDB alternative, that translates MongoDB wire protocol queries to SQL and can be used as a direct replacement for MongoDB 5.0+. In the Cozystack it is backed by PostgreSQL.
+
+### Managed Clickhouse
+
+ClickHouse is an open source high-performance and column-oriented SQL database management system (DBMS). It is used for online analytical processing (OLAP). In the Cozystack platform we use Altinity operator to provide Clickhouse.
+
 ### Managed RabbitMQ
 
 Widely known message broker. Platform-side implementation allows you to create failover clusters managed by the official RabbitMQ operator.
@@ -102,6 +114,9 @@ Widely known message broker. Platform-side implementation allows you to create f
 Nginx-based HTTP caching service - with its help you can always protect your application from overload using the powerful Nginx, which is traditionally used to build CDNs and caching servers.
 
 The platform-side implementation features efficient caching without using a clustered file system and horizontal scaling without duplicating data on multiple servers.
+
+### Managed NATS Messaging
+NATS is an open-source, simple, secure and high performance messaging system. It provides data layer for cloud native applications, IoT messaging, and microservices architectures.
 
 ### Managed Kubernetes
 
