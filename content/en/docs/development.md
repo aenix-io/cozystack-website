@@ -105,18 +105,45 @@ for the platform. We follow an umbrella chart logic to keep upstream charts in t
 `./charts` directory and override values.yaml in the application's root.
 This structure simplifies upstream chart updates.
 
-```
+```shell
 .
-├── Chart.yaml  # Helm chart definition and parameter description
-├── Makefile    # Common targets for simplifying local development
-├── charts      # Directory for upstream charts
-├── images      # Directory for Docker images
-├── patches     # Optional directory for upstream chart patches
-├── templates   # Additional manifests for the upstream Helm chart
-└── values.yaml # Override values for the upstream Helm chart
+├── Chart.yaml                           # Helm chart definition and parameter description
+├── Makefile                             # Common targets for simplifying local development
+├── charts                               # Directory for upstream charts
+├── images                               # Directory for Docker images
+├── patches                              # Optional directory for upstream chart patches
+├── templates                            # Additional manifests for the upstream Helm chart
+├── templates/dashboard-resourcemap.yaml # Role used to display k8s resources in dashboard
+├── values.yaml                          # Override values for the upstream Helm chart
+└── values.schema.json                   # JSON schema used for input values validation and to render UI elements in dashboard
 ```
 
+You can use bitnami's [readme-generator](https://github.com/bitnami/readme-generator-for-helm) for generating `README.md` and `values.schema.json` files.
+
+Just install it as `readme-generator` binary in your system and run generation using `make generate` command.
+
 ## Development
+
+### Buildx configuration
+
+To build images, you need to install and configure the [`docker buildx`](https://github.com/docker/buildx) plugin.
+
+The following command allows you to build images directly in a Kubernetes cluster:
+
+```bash
+docker buildx create \
+  --bootstrap \
+  --name=buildkit \
+  --driver=kubernetes \
+  --driver-opt=namespace=tenant-kvaps,replicas=2 \
+  --platform=linux/amd64 \
+  --platform=linux/arm64 \
+  --use
+```
+
+Alternatively, omit the --driver* options to set up the build environment in an local Docker environment.
+
+### Packages management
 
 Each application includes a Makefile to simplify the development process. We follow this logic for every package:
 
@@ -151,10 +178,48 @@ kubectl get pod -n cozy-system    # Check if everything works as expected
 kubectl get hr -A                 # Check HelmRelease objects
 ```
 
-After development, run E2E tests by calling `./hack/e2e.sh`.
-
 {{% alert color="info" %}}
 When rebuilding images, specify the `REGISTRY` environment variable to point to your Docker registry.
 
 Feel free to look inside each Makefile to better understand the logic.
 {{% /alert %}}
+
+### Testing
+
+The platform includes an [`e2e.sh`](https://github.com/aenix-io/cozystack/blob/main/hack/e2e.sh) script that performs the following tasks:
+
+- Runs three QEMU virtual machines
+- Configures Talos Linux
+- Installs Cozystack
+- Waits for all HelmReleases to be installed
+- Performs additional checks to ensure that components are up and running
+
+You can run e2e.sh either locally or directly within a Kubernetes container.
+
+To run tests in a Kubernetes cluster, navigate to the `packages/core/testing` directory and execute the following commands:
+
+```shell
+make apply    # Create testing sandbox in Kubernetes cluster
+make test     # Run the end-to-end tests in existing sandbox
+make delete   # Remove testing sandbox from Kubernetes cluster
+```
+
+{{% alert color="warning" %}}
+:warning: To run e2e tests in a Kubernetes cluster, your nodes must have sufficient free resources to create 3 VMs and store the data for the deployed applications.
+
+It is recommended to use bare-metal nodes of the parent Cozystack cluster.
+{{% /alert %}}
+
+### Dynamic Development Environment
+
+If you prefer to develop Cozystack in virtual machines instead of modifying the existing cluster, you can utilize the same sandbox from testing environment. The Makefile in the `packages/core/testing` includes additional options:
+
+```shell
+make exec     # Opens an interactive shell in the sandbox container.
+make login    # Downloads the kubeconfig into a temporary directory and runs a shell with the sandbox environment; mirrord must be installed.
+make proxy    # Enable a SOCKS5 proxy server; mirrord and gost must be installed.
+```
+
+Socks5 proxy can be configured in a browser to access services of a cluster running in sandbox. Firefox has an handy extension for toogling proxy on/off:
+
+- [Proxy Toggle](https://addons.mozilla.org/en-US/firefox/addon/proxy-toggle/)
