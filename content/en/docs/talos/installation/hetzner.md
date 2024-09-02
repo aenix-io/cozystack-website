@@ -93,6 +93,36 @@ EOT
 
 Edit network-config and specify your network settings using [network-config-format-v2](https://cloudinit.readthedocs.io/en/latest/reference/network-config-format-v2.html).
 
+Cloud-init configuration example when using [Hetzner vSwitch](https://docs.hetzner.com/robot/dedicated-server/network/vswitch/) with the VLAN ID 4000.
+
+```bash
+echo 'local-hostname: talos' > /mnt/meta-data
+echo '#cloud-config' > /mnt/user-data
+cat > /mnt/network-config <<EOT
+version: 2
+ethernets:
+  $INTERFACE_NAME:
+    dhcp4: false
+    addresses:
+      - "${IP_CIDR}"
+    gateway4: "${GATEWAY}"
+    nameservers:
+      addresses: [8.8.8.8]
+vlans:
+  vlan4000:
+    id: 4000 
+    link: $INTERFACE_NAME
+    mtu: 1400 
+    dhcp4: false
+    addresses:
+      - "10.3.3.101/24"
+    routes:
+      - to: 10.3.0.0/16
+        via: 10.3.3.1
+
+EOT
+```
+
 You can find more comprehensive example under the [link](https://github.com/siderolabs/talos/blob/10f958cf41ec072209f8cb8724e6f89db24ca1b6/internal/app/machined/pkg/runtime/v1alpha1/platform/nocloud/testdata/metadata-v2.yaml)
 
 Umount cloud-init partition, sync changes, and reboot the server
