@@ -29,6 +29,9 @@ NAME        MAJ:MIN RM   SIZE RO TYPE  MOUNTPOINTS
 nvme0n1     259:4    0 476.9G  0 disk
 nvme1n1     259:0    0 476.9G  0 disk
 ```
+{{% alert color="warning" %}}
+:warning: The following commands will erase your data!
+{{% /alert %}}
 
 Wipe disks
 ```bash
