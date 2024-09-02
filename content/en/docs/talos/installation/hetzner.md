@@ -32,7 +32,7 @@ nvme1n1     259:0    0 476.9G  0 disk
 
 Set environment variable:
 ```bash
-DISK=$(lsblk -dn -o NAME,SIZE,TYPE -e 1,7,11,14,15 | sed -n 1p | awk '{print $1}')
+DISK=$(lsblk -dn -o NAME,SIZE,TYPE -e 1,7,11,14,15 | sort | sed -n 1p | awk '{print $1}')
 
 echo "DISK=$DISK"
 ```
