@@ -88,7 +88,7 @@ echo "GATEWAY=$GATEWAY"
 Write cloud-init configuration:
 
 ```bash
-echo 'local-hostname: talos' > /mnt/meta-data
+echo 'hostname: talos' > /mnt/meta-data
 echo '#cloud-config' > /mnt/user-data
 cat > /mnt/network-config <<EOT
 version: 2
@@ -108,7 +108,7 @@ Edit network-config and specify your network settings using [network-config-form
 Cloud-init configuration example when using [Hetzner vSwitch](https://docs.hetzner.com/robot/dedicated-server/network/vswitch/) with the VLAN ID 4000.
 
 ```bash
-echo 'local-hostname: talos' > /mnt/meta-data
+echo 'hostname: talos' > /mnt/meta-data
 echo '#cloud-config' > /mnt/user-data
 cat > /mnt/network-config <<EOT
 version: 2
