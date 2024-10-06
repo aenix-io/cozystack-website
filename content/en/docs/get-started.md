@@ -111,7 +111,7 @@ kubectl apply -f https://github.com/aenix-io/cozystack/raw/v0.16.2/manifests/coz
 ```
 
 {{% alert color="info" %}}
-Currently Cozytack does not separate control-plane and worker nodes, so if your nodes have control-plane taint, pods will stuck in `Pending` status.  
+Currently Cozystack does not separate control-plane and worker nodes, so if your nodes have control-plane taint, pods will stuck in `Pending` status.
 
 You have to remove control-plane taint from the nodes:
 ```bash
