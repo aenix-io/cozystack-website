@@ -292,7 +292,7 @@ example output:
 ```console
 NAME              PROVISIONER              RECLAIMPOLICY   VOLUMEBINDINGMODE      ALLOWVOLUMEEXPANSION   AGE
 local (default)   linstor.csi.linbit.com   Delete          WaitForFirstConsumer   true                   11m
-replicated        linstor.csi.linbit.com   Delete          WaitForFirstConsumer   true                   11m
+replicated        linstor.csi.linbit.com   Delete          Immediate              true                   11m
 ```
 
 ## Configure Networking interconnection
