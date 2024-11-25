@@ -11,6 +11,9 @@ Creating users and add roles for them
 
 When a tenant is created in Cozy (starting with version 1.6.0), roles, RoleBindings and keycloak groups will automatically be created in the Kubernetes cluster.
 
+To create a user, refer to the following documentation:
+[Keycloak Admin Console Documentation](https://www.keycloak.org/docs/latest/server_admin/#using-the-admin-console)
+
 ## Assigning a Role to a User for a Tenant
 
 1. **Access Keycloak**:
