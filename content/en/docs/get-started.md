@@ -101,6 +101,17 @@ data:
   ipv4-join-cidr: "100.64.0.0/16"
 EOT
 ```
+{{% alert color="warning" %}}
+If you use PAAS bundles or enable keycloak for distro, add to your configmap:
+```yaml
+data:
+  ...
+  root-host: < YOUR ROOT HOST if known, like: infra.example.org >
+  api-server-adress: < YOUR API SERVER ADRESS, like: 55.21.33.22 or domain name>
+```
+{{% /alert %}}
+
+
 
 Create namespace and install Cozystack system components:
 
