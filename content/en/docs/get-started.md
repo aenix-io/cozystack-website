@@ -346,30 +346,19 @@ EOT
 
 ## Setup basic applications
 
-Get token from `tenant-root`:
+- Set `etcd`, `monitoring` and `ingress` to enabled position
+```bash
+kubectl -n tenant-root patch hr tenant-root --type='merge' -p='{"spec":{"values":{"etcd":{"enabled":true},"monitoring":{"enabled":true},"ingress":{"enabled":true}}}}'
+```
+
+Get token from `tenant-root` (If dont use keycloak):
 ```bash
 kubectl get secret -n tenant-root tenant-root -o go-template='{{ printf "%s\n" (index .data "token" | base64decode) }}'
 ```
 
-Enable port forward to cozy-dashboard:
-```bash
-kubectl port-forward -n cozy-dashboard svc/dashboard 8000:80
-```
-
-Open: http://localhost:8000/
-
-- Select `tenant-root`
-- Click `Upgrade` button
-- Into `host` section write a domain which you're going to use as parent domain for all deployed applications
-
-  {{% alert color="warning" %}}
-  :warning: if you have no domain yet, you can use `192.168.100.200.nip.io` where `192.168.100.200` is a first IP address in your network addresses range.
-
-   alternatively you can leave the default value, however you'll be need to modify your `/etc/hosts` every time you want to access specific application.
-  {{% /alert %}}
-
-- Set `etcd`, `monitoring` and `ingress` to enabled position
-- Click Deploy
+If you use keycloak, open `keycloak.<your-root-host>`
+- Create user in cozy realm [documentation](https://www.keycloak.org/docs/latest/server_admin/index.html#proc-creating-user_server_administration_guide)
+- Add user to `kubeapps-admin` group
 
 {{% alert color="info" %}}
 If you plan to use an external load balancer or a client-side balancer to access your services through the same IPs for your nodes, you have to modify `ingress` application to specify these IPs in `externalIPs`.
