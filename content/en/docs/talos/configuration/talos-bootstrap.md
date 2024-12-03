@@ -88,6 +88,23 @@ cluster:
 EOT
 ```
 
+{{% alert color="warning" %}}
+If you use keycloak.
+
+- Add in `patch-controlplane.yaml`:
+  ```
+  cluster:
+    apiServer:
+    apiServer:
+      extraArgs:
+      oidc-issuer-url: "https://keycloak.example.com/realms/cozy"
+      oidc-client-id: "kubernetes"
+      oidc-username-claim: "preferred_username"
+      oidc-groups-claim: "groups"
+
+Where example.com is your root-domain.
+{{% /alert %}}
+
 Run [talos-bootstrap](https://github.com/aenix-io/talos-bootstrap/) to deploy the first node in a cluster:
 
 ```bash
@@ -112,6 +129,3 @@ Talos-bootstrap will enable bootstrap on the first configured node in a cluster.
 Repeat the step for the other nodes in a cluster.
 
 Now follow **Get Started** guide starting from the [**Install Cozystack**](/docs/get-started/#install-cozystack) section, to continue the installation.
-
-
-
