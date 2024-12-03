@@ -102,7 +102,7 @@ If you use keycloak.
       oidc-username-claim: "preferred_username"
       oidc-groups-claim: "groups"
 
-Where example.com is your root-domain.
+Where example.com is your `root-host`.
 {{% /alert %}}
 
 Run [talos-bootstrap](https://github.com/aenix-io/talos-bootstrap/) to deploy the first node in a cluster:
