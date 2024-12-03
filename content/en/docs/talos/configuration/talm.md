@@ -39,8 +39,6 @@ Before v0.6.6 Talm:
 
 {{% /alert %}}
 
-
-
 The structure of the project mostly mirrors an ordinary Helm chart:
 
 - `charts` - a directory that includes a common library chart with functions used for querying information from Talos Linux.
