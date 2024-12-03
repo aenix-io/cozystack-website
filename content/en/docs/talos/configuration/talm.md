@@ -30,12 +30,11 @@ Before v0.6.6 Talm:
 ```
   cluster:
     apiServer:
-    apiServer:
       extraArgs:
-      oidc-issuer-url: "https://keycloak.example.com/realms/cozy"
-      oidc-client-id: "kubernetes"
-      oidc-username-claim: "preferred_username"
-      oidc-groups-claim: "groups"
+        oidc-issuer-url: "https://keycloak.example.com/realms/cozy"
+        oidc-client-id: "kubernetes"
+        oidc-username-claim: "preferred_username"
+        oidc-groups-claim: "groups"
 
 {{% /alert %}}
 
