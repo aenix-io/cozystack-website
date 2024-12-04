@@ -353,7 +353,7 @@ kubectl patch -n tenant-root tenants.apps.cozystack.io root --type=merge -p '{"s
 
 If you don't use external load balancer, specify all your external IPs of your nodes for the `ingress` controller:
 
-```
+```bash
 kubectl patch -n tenant-root ingresses.apps.cozystack.io ingress --type=merge -p '{"spec":{
   "externalIPs": [
     "192.168.100.11",
@@ -438,6 +438,14 @@ root-ingress-controller   LoadBalancer   10.96.16.141   192.168.100.200   80:316
 ```
 
 **Cozystack Dashboard**
+
+If you want to access dashboard via root-ingress controller, you can enable this option:
+
+```bash
+kubectl patch -n tenant-root ingresses.apps.cozystack.io ingress --type=merge -p '{"spec":{
+  "dashboard": true
+}}'
+```
 
 Use `dashboatd.example.org` (under 192.168.100.200) to access system dashboard, where `example.org` is your domain specified for `tenant-root`
 
