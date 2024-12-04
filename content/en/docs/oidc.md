@@ -81,6 +81,8 @@ kubectl get secret -o yaml -n cozy-keycloak keycloak-credentials -o go-template=
 2. **Add User to the `kubeapps-admin` Group**  
    Assign the user to the `kubeapps-admin` group.
 
-### Step 4: Get Kubeconfig
+### Step 4: Retrieve Kubeconfig
 
-Now access the cluster via Dashboard 
+To access the cluster through the Dashboard, download your kubeconfig by selecting the deployed tenant and copying the secret from the resource map.
+
+This kubeconfig will be automatically configured to use OIDC authentication and the namespace dedicated to the tenant.
