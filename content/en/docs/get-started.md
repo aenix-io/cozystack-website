@@ -99,19 +99,14 @@ data:
   ipv4-pod-gateway: "10.244.0.1"
   ipv4-svc-cidr: "10.96.0.0/16"
   ipv4-join-cidr: "100.64.0.0/16"
+  root-host: example.org
+  api-server-endpoint: https://192.168.100.10:6443
 EOT
 ```
-{{% alert color="warning" %}}
-If you use PAAS bundles or enable keycloak for distro, add to your configmap:
-```yaml
-data:
-  ...
-  root-host: < YOUR ROOT HOST if known, like: infra.example.org >
-  api-server-adress: < YOUR API SERVER ADRESS, like: 55.21.33.22 or domain name>
-```
+{{% alert color="info" %}}
+- `root-host` is used as the main domain for all services created under Cozystack, such as the dashboard, Grafana, Keycloak, etc.
+- `api-server-endpoint` is primarily used for generating kubeconfig files for your users. It is recommended to use globally accessible IP addresses instead of local ones.
 {{% /alert %}}
-
-
 
 Create namespace and install Cozystack system components:
 
@@ -346,24 +341,29 @@ EOT
 
 ## Setup basic applications
 
-- Set `etcd`, `monitoring` and `ingress` to enabled position
+- Set `etcd`, `monitoring` and `ingress` to enabled in your `tenant-root`
 ```bash
-kubectl -n tenant-root patch hr tenant-root --type='merge' -p='{"spec":{"values":{"etcd":{"enabled":true},"monitoring":{"enabled":true},"ingress":{"enabled":true}}}}'
+kubectl patch -n tenant-root tenants.apps.cozystack.io root --type=merge -p '{"spec":{
+  "ingress": true,
+  "monitoring": true,
+  "etcd": true,
+  "isolated": true
+}}'
 ```
 
-Get token from `tenant-root` (If dont use keycloak):
-```bash
-kubectl get secret -n tenant-root tenant-root -o go-template='{{ printf "%s\n" (index .data "token" | base64decode) }}'
+If you don't use external load balancer, specify all your external IPs of your nodes for the `ingress` controller:
+
+```
+kubectl patch -n tenant-root ingresses.apps.cozystack.io ingress --type=merge -p '{"spec":{
+  "externalIPs": [
+    "192.168.100.11",
+    "192.168.100.12",
+    "192.168.100.13"
+  ]
+}}'
 ```
 
-If you use keycloak, open `keycloak.<your-root-host>`
-- Create user in cozy realm [documentation](https://www.keycloak.org/docs/latest/server_admin/index.html#proc-creating-user_server_administration_guide)
-- Add user to `kubeapps-admin` group
-
-{{% alert color="info" %}}
-If you plan to use an external load balancer or a client-side balancer to access your services through the same IPs for your nodes, you have to modify `ingress` application to specify these IPs in `externalIPs`.
-{{% /alert %}}
-
+## Final steps
 
 Check persistent volumes provisioned:
 
@@ -437,6 +437,17 @@ NAME                      TYPE           CLUSTER-IP     EXTERNAL-IP       PORT(S
 root-ingress-controller   LoadBalancer   10.96.16.141   192.168.100.200   80:31632/TCP,443:30113/TCP   3m33s
 ```
 
+**Cozystack Dashboard**
+
+Use `dashboatd.example.org` (under 192.168.100.200) to access system dashboard, where `example.org` is your domain specified for `tenant-root`
+
+Get authentification token from `tenant-root`:
+```bash
+kubectl get secret -n tenant-root tenant-root -o go-template='{{ printf "%s\n" (index .data "token" | base64decode) }}'
+```
+
+**Grafana**
+
 Use `grafana.example.org` (under 192.168.100.200) to access system monitoring, where `example.org` is your domain specified for `tenant-root`
 
 - login: `admin`
@@ -444,3 +455,5 @@ Use `grafana.example.org` (under 192.168.100.200) to access system monitoring, w
   ```bash
   kubectl get secret -n tenant-root grafana-admin-password -o go-template='{{ printf "%s\n" (index .data "password" | base64decode) }}'
   ```
+
+Now you can consider [enabling OIDC](/docs/oidc/)
