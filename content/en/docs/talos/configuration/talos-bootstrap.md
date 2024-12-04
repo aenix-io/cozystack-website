@@ -44,7 +44,7 @@ machine:
     - name: zfs
     - name: spl
   install:
-    image: ghcr.io/aenix-io/cozystack/talos:v1.8.2
+    image: ghcr.io/aenix-io/cozystack/talos:v1.8.3
   files:
   - content: |
       [plugins]
