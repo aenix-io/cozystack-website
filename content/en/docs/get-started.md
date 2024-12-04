@@ -99,8 +99,14 @@ data:
   ipv4-pod-gateway: "10.244.0.1"
   ipv4-svc-cidr: "10.96.0.0/16"
   ipv4-join-cidr: "100.64.0.0/16"
+  root-host: example.org
+  api-server-endpoint: https://192.168.100.10:6443
 EOT
 ```
+{{% alert color="info" %}}
+- `root-host` is used as the main domain for all services created under Cozystack, such as the dashboard, Grafana, Keycloak, etc.
+- `api-server-endpoint` is primarily used for generating kubeconfig files for your users. It is recommended to use globally accessible IP addresses instead of local ones.
+{{% /alert %}}
 
 Create namespace and install Cozystack system components:
 
@@ -335,35 +341,29 @@ EOT
 
 ## Setup basic applications
 
-Get token from `tenant-root`:
+- Set `etcd`, `monitoring` and `ingress` to enabled in your `tenant-root`
 ```bash
-kubectl get secret -n tenant-root tenant-root -o go-template='{{ printf "%s\n" (index .data "token" | base64decode) }}'
+kubectl patch -n tenant-root tenants.apps.cozystack.io root --type=merge -p '{"spec":{
+  "ingress": true,
+  "monitoring": true,
+  "etcd": true,
+  "isolated": true
+}}'
 ```
 
-Enable port forward to cozy-dashboard:
+If you don't use external load balancer, specify all your external IPs of your nodes for the `ingress` controller:
+
 ```bash
-kubectl port-forward -n cozy-dashboard svc/dashboard 8000:80
+kubectl patch -n tenant-root ingresses.apps.cozystack.io ingress --type=merge -p '{"spec":{
+  "externalIPs": [
+    "192.168.100.11",
+    "192.168.100.12",
+    "192.168.100.13"
+  ]
+}}'
 ```
 
-Open: http://localhost:8000/
-
-- Select `tenant-root`
-- Click `Upgrade` button
-- Into `host` section write a domain which you're going to use as parent domain for all deployed applications
-
-  {{% alert color="warning" %}}
-  :warning: if you have no domain yet, you can use `192.168.100.200.nip.io` where `192.168.100.200` is a first IP address in your network addresses range.
-
-   alternatively you can leave the default value, however you'll be need to modify your `/etc/hosts` every time you want to access specific application.
-  {{% /alert %}}
-
-- Set `etcd`, `monitoring` and `ingress` to enabled position
-- Click Deploy
-
-{{% alert color="info" %}}
-If you plan to use an external load balancer or a client-side balancer to access your services through the same IPs for your nodes, you have to modify `ingress` application to specify these IPs in `externalIPs`.
-{{% /alert %}}
-
+## Final steps
 
 Check persistent volumes provisioned:
 
@@ -437,6 +437,25 @@ NAME                      TYPE           CLUSTER-IP     EXTERNAL-IP       PORT(S
 root-ingress-controller   LoadBalancer   10.96.16.141   192.168.100.200   80:31632/TCP,443:30113/TCP   3m33s
 ```
 
+**Cozystack Dashboard**
+
+If you want to access dashboard via root-ingress controller, you can enable this option:
+
+```bash
+kubectl patch -n tenant-root ingresses.apps.cozystack.io ingress --type=merge -p '{"spec":{
+  "dashboard": true
+}}'
+```
+
+Use `dashboatd.example.org` (under 192.168.100.200) to access system dashboard, where `example.org` is your domain specified for `tenant-root`
+
+Get authentification token from `tenant-root`:
+```bash
+kubectl get secret -n tenant-root tenant-root -o go-template='{{ printf "%s\n" (index .data "token" | base64decode) }}'
+```
+
+**Grafana**
+
 Use `grafana.example.org` (under 192.168.100.200) to access system monitoring, where `example.org` is your domain specified for `tenant-root`
 
 - login: `admin`
@@ -444,3 +463,5 @@ Use `grafana.example.org` (under 192.168.100.200) to access system monitoring, w
   ```bash
   kubectl get secret -n tenant-root grafana-admin-password -o go-template='{{ printf "%s\n" (index .data "password" | base64decode) }}'
   ```
+
+Now you can consider [enabling OIDC](/docs/oidc/)

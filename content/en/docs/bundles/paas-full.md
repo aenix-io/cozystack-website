@@ -23,6 +23,8 @@ data:
   ipv4-pod-gateway: "10.244.0.1"
   ipv4-svc-cidr: "10.96.0.0/16"
   ipv4-join-cidr: "100.64.0.0/16"
+  root-host: example.org
+  api-server-endpoint: https://192.168.100.10:6443
 ```
 
 ### Configuration parameters
@@ -36,3 +38,5 @@ data:
 | `ipv4-pod-gateway` | The gateway address for the pod subnet |
 | `ipv4-svc-cidr` | The pod subnet used by Services to assign IPs |
 | `ipv4-join-cidr` | The `join` subnet, as a special subnet for network communication between the Node and Pod. Follow [kube-ovn](https://kubeovn.github.io/docs/en/guide/subnet/#join-subnet) documentation to learn more about these options. |
+| `root-host` | the main domain for all services created under Cozystack, such as the dashboard, Grafana, Keycloak, etc. |
+| `api-server-endpoint` | used for generating kubeconfig files for your users. It is recommended to use globally accessible IP addresses instead of local ones. |

@@ -19,6 +19,25 @@ cd cluster1
 talm init --preset cozystack
 ```
 
+{{% alert color="warning" %}}
+If you use keycloak.
+
+From v0.6.6 Talm:
+- in `cluster1/templates/_helpers.tpl` replace  `keycloak.example.com` to your domain.
+
+Before v0.6.6 Talm:
+- Add in template args manualy:
+```
+  cluster:
+    apiServer:
+      extraArgs:
+        oidc-issuer-url: "https://keycloak.example.com/realms/cozy"
+        oidc-client-id: "kubernetes"
+        oidc-username-claim: "preferred_username"
+        oidc-groups-claim: "groups"
+
+{{% /alert %}}
+
 The structure of the project mostly mirrors an ordinary Helm chart:
 
 - `charts` - a directory that includes a common library chart with functions used for querying information from Talos Linux.
