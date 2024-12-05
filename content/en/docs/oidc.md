@@ -77,6 +77,9 @@ kubectl get secret -o yaml -n cozy-keycloak keycloak-credentials -o go-template=
 
 1. **Create a User in the Cozy Realm**  
    Follow the [Keycloak documentation](https://www.keycloak.org/docs/latest/server_admin/index.html#proc-creating-user_server_administration_guide) to create a user in the Cozy realm.
+   {{% alert color="info" %}}
+   User must be with verified email.
+   {{% /alert %}}
 
 2. **Add User to the `kubeapps-admin` Group**  
    Assign the user to the `kubeapps-admin` group.
