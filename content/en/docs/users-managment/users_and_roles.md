@@ -42,6 +42,15 @@ To create a user, refer to the following documentation:
 
 ## Configure Roles for Each Tenant in Cozy:
 
+### Cluster wide
+- **`cozystack-cluster-admin`**
+  - Allow all.
+
+- **`kubeapps-admin`**
+  - Allow all in "" api group
+  - Allow all for helmreleases in helm.toolkit.fluxcd.io and apps.cozystack.io
+
+### Tenant wide
 - **`tenant-abc-view`**
   - Read-only access to resources from our API.
   - Ability to view logs.
