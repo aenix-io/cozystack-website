@@ -53,9 +53,9 @@ Wait until all resources are successfully installed and reach the `Ready` state:
 
 ```bash
 NAME                 AGE     READY   STATUS
-keycloak             2m19s   True    Helm install succeeded for release cozy-keycloak/keycloak.v1 with chart cozy-keycloak@0.19.0
-keycloak-configure   2m19s   True    Helm install succeeded for release cozy-keycloak/keycloak-configure.v1 with chart cozy-keycloak-configure@0.19.0
-keycloak-operator    2m19s   True    Helm install succeeded for release cozy-keycloak/keycloak-operator.v1 with chart cozy-keycloak-operator@0.19.0
+keycloak             2m19s   True    Release reconciliation succeeded
+keycloak-configure   2m19s   True    Release reconciliation succeeded
+keycloak-operator    2m19s   True    Release reconciliation succeeded
 ```
 
 <!-- TODO: automate this -->
