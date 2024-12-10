@@ -2,7 +2,7 @@
 title: "OIDC Server"
 linkTitle: "OIDC Server"
 description: "OIDC Server"
-weight: 35
+weight: 36
 ---
 
 ## Prerequisites
