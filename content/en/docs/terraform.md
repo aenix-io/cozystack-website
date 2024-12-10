@@ -10,7 +10,7 @@ weight: 37
 Cozystack has powerful API, which allows you to deploy services using various tools.
 
 The best option to learn Cozystack API is:
-- Use dashboard and deploy some application from it
+- use dashboard and deploy some application from it
 - discover deployed resource in Cozystack API, and take it as example
 - parametrize and replicate the example resource to create your own resources through API
 
