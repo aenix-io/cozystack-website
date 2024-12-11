@@ -1,13 +1,13 @@
 ---
-title: "OIDC Server"
-linkTitle: "OIDC Server"
-description: "OIDC Server"
+title: "Enable OIDC Server"
+linkTitle: "Enable OIDC Server"
+description: "How to enable OIDC Server"
 weight: 35
 ---
 
 ## Prerequisites
 
-1. **OIDC Configuration**  
+1. **OIDC Configuration**
    Your API server must be configured to use OIDC. If you are using Talos Linux, your machine configuration should include the following parameters:
 
    ```yaml
@@ -20,10 +20,10 @@ weight: 35
          oidc-groups-claim: "groups"
    ```
 
-2. **Domain Reachability**  
+2. **Domain Reachability**
    Ensure that the domain `keycloak.example.org` is accessible from the cluster and resolves to your root ingress controller.
 
-3. **Storage Configuration**  
+3. **Storage Configuration**
    Storage must be properly configured.
 
 ## Configuration
@@ -47,7 +47,7 @@ cozy-keycloak                    keycloak-configure          26s    False     de
 cozy-keycloak                    keycloak-operator           26s    False     dependency 'cozy-keycloak/keycloak' is not ready
 ```
 
-### Step 2: Wait for Installation Completion  
+### Step 2: Wait for Installation Completion
 
 Wait until all resources are successfully installed and reach the `Ready` state:
 
@@ -65,7 +65,7 @@ Reconcile tenants:
 kubectl annotate -n tenant-root hr/tenant-root reconcile.fluxcd.io/forceAt=$(date +"%Y-%m-%dT%H:%M:%SZ") --overwrite
 ```
 
-### Step 3: Access Keycloak  
+### Step 3: Access Keycloak
 
 You can now access Keycloak at `https://keycloak.example.org` (replace `example.org` with your infrastructure domain).
 
@@ -75,7 +75,7 @@ To get the Keycloak credentials, run the following command:
 kubectl get secret -o yaml -n cozy-keycloak keycloak-credentials -o go-template='{{ printf "%s\n" (index .data "password" | base64decode) }}'
 ```
 
-1. **Create a User in the Cozy Realm**  
+1. **Create a User in the Cozy Realm**
    Follow the [Keycloak documentation](https://www.keycloak.org/docs/latest/server_admin/index.html#proc-creating-user_server_administration_guide) to create a user in the Cozy realm.
    {{% alert color="info" %}}
    Users must have a verified email address in Keycloak. This is required for proper OIDC authentication.
@@ -85,7 +85,7 @@ kubectl get secret -o yaml -n cozy-keycloak keycloak-credentials -o go-template=
    3. Use the "Email Verification" action
    {{% /alert %}}
 
-2. **Add User to the `kubeapps-admin` Group**  
+2. **Add User to the `kubeapps-admin` Group**
    Assign the user to the `kubeapps-admin` group.
 
 ### Step 4: Retrieve Kubeconfig

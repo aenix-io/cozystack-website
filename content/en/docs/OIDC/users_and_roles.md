@@ -40,8 +40,22 @@ To create a user, refer to the following documentation:
    ```
    Then Keycloak will be available at: `keycloak.infra.example.org`
 
+  {{% alert color="warning" %}}
+  If you are planning to integrate with external services either as clients or as IdPs, your Keycloak address needs to be publicly accessible and reachable by these services.
+  {{% /alert %}}
+
+
 ## Configure Roles for Each Tenant in Cozy:
 
+### Cluster wide
+- **`cozystack-cluster-admin`**
+  - Allow all.
+
+- **`kubeapps-admin`**
+  - Allow all in "" api group
+  - Allow all for helmreleases in helm.toolkit.fluxcd.io and apps.cozystack.io
+
+### Tenant wide
 - **`tenant-abc-view`**
   - Read-only access to resources from our API.
   - Ability to view logs.
