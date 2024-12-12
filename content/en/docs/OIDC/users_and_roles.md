@@ -2,7 +2,7 @@
 title: Creating users and add roles for them
 linkTitle: Users and roles
 description: "How to create users and add roles for them"
-weight: 30
+weight: 50
 ---
 
 Creating users and add roles for them

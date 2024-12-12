@@ -2,7 +2,7 @@
 title: "Cozystack Components"
 linkTitle: "Components"
 description: "Cozystack Components"
-weight: 40
+weight: 15
 ---
 
 ## Basic Platform Stack

@@ -1,6 +1,6 @@
 ---
 title: "OIDC in Cozystack"
-linkTitle: "OIDC in Cozystack"
+linkTitle: "OIDC"
 description: "OIDC in Cozystack"
-weight: 35
+weight: 36
 ---
