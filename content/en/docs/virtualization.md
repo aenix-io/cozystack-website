@@ -2,7 +2,7 @@
 title: "Virtualization"
 linkTitle: "Virtualization"
 description: "Virtualization overview"
-weight: 55
+weight: 40
 ---
 
 This guide is intended to explain how virtualization works within Cozystack.

@@ -2,7 +2,7 @@
 title: "Enable OIDC Server"
 linkTitle: "OIDC Server"
 description: "How to enable OIDC Server"
-weight: 10
+weight: 36
 ---
 
 ## Prerequisites
