@@ -221,7 +221,7 @@ cluster:
   allowSchedulingOnControlPlanes: true
 ```
 
-![YAML](/img/yaml.png)
+![YAML](/img/yaml_img.png)
 
 **This section isn’t generated automatically:**
 
