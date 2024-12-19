@@ -93,3 +93,15 @@ kubectl get secret -o yaml -n cozy-keycloak keycloak-credentials -o go-template=
 To access the cluster through the Dashboard, download your kubeconfig by selecting the deployed tenant and copying the secret from the resource map.
 
 This kubeconfig will be automatically configured to use OIDC authentication and the namespace dedicated to the tenant.
+
+Setup [kubelogin](https://github.com/int128/kubelogin) it's necessary for using kubeconfig with OIDC
+```bash
+# Homebrew (macOS and Linux)
+brew install int128/kubelogin/kubelogin
+
+# Krew (macOS, Linux, Windows and ARM)
+kubectl krew install oidc-login
+
+# Chocolatey (Windows)
+choco install kubelogin
+```
