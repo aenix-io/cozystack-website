@@ -113,7 +113,7 @@ Create namespace and install Cozystack system components:
 ```bash
 kubectl create ns cozy-system
 kubectl apply -f cozystack-config.yaml
-kubectl apply -f https://github.com/aenix-io/cozystack/raw/v0.20.1/manifests/cozystack-installer.yaml
+kubectl apply -f https://github.com/aenix-io/cozystack/raw/v0.20.2/manifests/cozystack-installer.yaml
 ```
 
 {{% alert color="info" %}}
@@ -447,7 +447,7 @@ kubectl patch -n tenant-root ingresses.apps.cozystack.io ingress --type=merge -p
 }}'
 ```
 
-Use `dashboatd.example.org` (under 192.168.100.200) to access system dashboard, where `example.org` is your domain specified for `tenant-root`
+Use `dashboard.example.org` (under 192.168.100.200) to access system dashboard, where `example.org` is your domain specified for `tenant-root`
 
 Get authentification token from `tenant-root`:
 ```bash

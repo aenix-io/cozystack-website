@@ -1,8 +1,8 @@
 ---
-title: "OIDC Server"
+title: "Enable OIDC Server"
 linkTitle: "OIDC Server"
-description: "OIDC Server"
-weight: 35
+description: "How to enable OIDC Server"
+weight: 36
 ---
 
 ## Prerequisites
@@ -26,11 +26,11 @@ weight: 35
 3. **Storage Configuration**  
    Storage must be properly configured.
 
-## Configuration
+## Configuration  
 
 If all prerequisites are met, you can proceed with the configuration steps.
 
-### Step 1: Enable OIDC in Cozystack
+### Step 1: Enable OIDC in Cozystack  
 
 Edit your Cozystack ConfigMap to enable OIDC:
 
