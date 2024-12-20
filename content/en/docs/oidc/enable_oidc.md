@@ -94,7 +94,7 @@ To access the cluster through the Dashboard, download your kubeconfig by selecti
 
 This kubeconfig will be automatically configured to use OIDC authentication and the namespace dedicated to the tenant.
 
-Setup [kubelogin](https://github.com/int128/kubelogin) it's necessary for using kubeconfig with OIDC
+Setup [kubelogin](https://github.com/int128/kubelogin) which is necessary to use an OIDC-enabled kubeconfig.
 ```bash
 # Homebrew (macOS and Linux)
 brew install int128/kubelogin/kubelogin
