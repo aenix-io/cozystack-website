@@ -15,7 +15,7 @@ Repair helmreleases if nessesary.
 
 ### Apply new version
 ```bash
-version=vX.Y.Z.
+version=vX.Y.Z
 kubectl apply -f https://github.com/aenix-io/cozystack/raw/$version/manifests/cozystack-installer.yaml
 ```
 
