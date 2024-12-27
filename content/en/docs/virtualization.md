@@ -82,8 +82,8 @@ The first disk is always bootable, and the VM will attempt to boot from it.
 
 ```yaml
 disks:
-- name: vm-disk-example-system
-- name: vm-disk-example-data
+- name: example-system
+- name: example-data
 ```
 
 The rest parameters are similar to Virtual Machine (simple)
