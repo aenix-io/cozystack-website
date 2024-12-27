@@ -54,30 +54,6 @@ Follow the guide to bootstrap your Talos Linux cluster using one of the followin
 - [**talos-bootstrap**](/docs/talos/configuration/talos-bootstrap/) - for a quick walkthrough
 - [**Talm**](/docs/talos/configuration/talm/) - for declarative cluster management
 
-Save admin kubeconfig to access your Kubernetes cluster:
-```bash
-cp -i kubeconfig ~/.kube/config
-```
-
-Check connection:
-```bash
-kubectl get ns
-```
-
-example output:
-```console
-NAME              STATUS   AGE
-default           Active   7m56s
-kube-node-lease   Active   7m56s
-kube-public       Active   7m56s
-kube-system       Active   7m56s
-```
-
-
-{{% alert color="warning" %}}
-:warning: All nodes should currently show as `READY: False`, don't worry about that, this is because you disabled the default CNI plugin in the previous step. Cozystack will install it's own CNI-plugin on the next step.
-{{% /alert %}}
-
 ## Install Cozystack
 
 write config for cozystack, refer to [bundles](/docs/bundles/) documentation for configuration parameters
