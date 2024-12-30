@@ -67,6 +67,10 @@ cluster:
 EOT
 
 cat > patch-controlplane.yaml <<\EOT
+machine:
+  nodeLabels:
+    node.kubernetes.io/exclude-from-external-load-balancers:
+      $patch: delete
 cluster:
   allowSchedulingOnControlPlanes: true
   controllerManager:
