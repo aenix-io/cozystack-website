@@ -128,6 +128,7 @@ reboot
   - **Gateway**.
 
 ![Public IP](/img/public_ip.png)
+
 ![Public Networks](/img/public_networks.png)
 
 ## Talos Configuration
