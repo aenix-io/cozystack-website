@@ -47,11 +47,11 @@ The DRBD kernel module is included in the mainline Linux kernel and has been use
 
 DRBD is managed using LINSTOR, a system integrated with Kubernetes and which is a management layer for creating virtual volumes based on DRBD. It allows you to easily manage hundreds or thousands of virtual volumes in a cluster.
 
-### OVN
+### Kube-OVN
 
-OVN is a free implementation of virtual network fabric for Kubernetes and OpenStack based on Open vSwitch technology. With OVN, you get a robust and functional virtual network that ensures reliable isolation between tenants and provides floating addresses for virtual machines.
+OVN is a free implementation of virtual network fabric for Kubernetes and OpenStack based on Open vSwitch technology. With Kube-OVN, you get a robust and functional virtual network that ensures reliable isolation between tenants and provides floating addresses for virtual machines.
 
-In the future, this will enable seamless integration with other clusters and customer network services
+In the future, this will enable seamless integration with other clusters and customer network services.
 
 ### Cilium
 
