@@ -40,3 +40,5 @@ data:
 | `ipv4-join-cidr` | The `join` subnet, as a special subnet for network communication between the Node and Pod. Follow [kube-ovn](https://kubeovn.github.io/docs/en/guide/subnet/#join-subnet) documentation to learn more about these options. |
 | `root-host` | the main domain for all services created under Cozystack, such as the dashboard, Grafana, Keycloak, etc. |
 | `api-server-endpoint` | used for generating kubeconfig files for your users. It is recommended to use globally accessible IP addresses instead of local ones. |
+| `oidc-enabled` | used to enable [oidc](/docs/oidc/) feature in Cozystack (default: `false`) |
+| `telemetry-enabled` | used to enable [telemetry](/docs/telemetry/) feature in Cozystack (default: `true`) |
