@@ -79,9 +79,12 @@ data:
   api-server-endpoint: https://192.168.100.10:6443
 EOT
 ```
-{{% alert color="info" %}}
+
 - `root-host` is used as the main domain for all services created under Cozystack, such as the dashboard, Grafana, Keycloak, etc.
 - `api-server-endpoint` is primarily used for generating kubeconfig files for your users. It is recommended to use globally accessible IP addresses instead of local ones.
+
+{{% alert color="info" %}}
+Cozystack enables telemetry collection. Learn more about what data is collected and how to opt out in the [Telemetry Documentation](/docs/telemetry/).
 {{% /alert %}}
 
 Create namespace and install Cozystack system components:
