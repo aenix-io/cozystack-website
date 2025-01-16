@@ -92,6 +92,11 @@ kubectl apply -f cozystack-config.yaml
 kubectl apply -f https://github.com/aenix-io/cozystack/raw/v0.21.1/manifests/cozystack-installer.yaml
 ```
 
+{{% alert color="warning" %}}
+By default, Cozystack is configured to use the [KubePrism](https://www.talos.dev/latest/kubernetes-guides/configuration/kubeprism/) feature of Talos Linux, which allows access to the Kubernetes API via a local address on the node.
+If you're installing Cozystack on a system other than Talos Linux, you must update the `KUBERNETES_SERVICE_HOST` and `KUBERNETES_SERVICE_PORT` environment variables in the `cozystack-installer.yaml` manifest.
+{{% /alert %}}
+
 {{% alert color="info" %}}
 Currently Cozystack does not separate control-plane and worker nodes, so if your nodes have control-plane taint, pods will stuck in `Pending` status.
 
