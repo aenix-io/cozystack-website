@@ -38,8 +38,8 @@ Edit your Cozystack ConfigMap to enable OIDC:
 kubectl patch -n cozy-system configmap cozystack --type=merge -p '{"data":{"oidc-enabled": "true"}}'
 ```
 
-If u need add extra redirect urls for dashboard client, for example, if u want use dashboard via port-forward, add edit your Cozystack ConfigMap.
-Redirect urls separated separated via comma.
+If you need to add extra redirect URLs for the dashboard client (for example, when accessing the dashboard via port-forwarding), edit your Cozystack ConfigMap.
+Multiple redirect URLs should be separated by commas.
 
 ```bash
 kubectl patch -n cozy-system configmap cozystack --type=merge -p '{"data":{"extra-keycloak-redirect-uri-for-dashboard": "http://127.0.0.1:8080/oauth2/callback/*,http://localhost:8080/oauth2/callback/*"}}'
