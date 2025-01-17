@@ -128,6 +128,7 @@ reboot
   - **Gateway**.
 
 ![Public IP](/img/public_ip.png)
+
 ![Public Networks](/img/public_networks.png)
 
 ## Talos Configuration
@@ -221,7 +222,7 @@ cluster:
   allowSchedulingOnControlPlanes: true
 ```
 
-![YAML](/img/yaml.png)
+![YAML](/img/yaml_img.png)
 
 **This section isn’t generated automatically:**
 

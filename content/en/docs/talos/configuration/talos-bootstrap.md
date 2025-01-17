@@ -44,7 +44,7 @@ machine:
     - name: zfs
     - name: spl
   install:
-    image: ghcr.io/aenix-io/cozystack/talos:v1.8.3
+    image: ghcr.io/aenix-io/cozystack/talos:v1.8.4
   files:
   - content: |
       [plugins]
@@ -67,6 +67,10 @@ cluster:
 EOT
 
 cat > patch-controlplane.yaml <<\EOT
+machine:
+  nodeLabels:
+    node.kubernetes.io/exclude-from-external-load-balancers:
+      $patch: delete
 cluster:
   allowSchedulingOnControlPlanes: true
   controllerManager:
@@ -120,7 +124,24 @@ talos-bootstrap install -n 1.2.3.4
 Where `1.2.3.4` is the IP-address of your remote node.
 {{% /alert %}}
 
+Export your `KUBECONFIG` variable:
+```bash
+export KUBECONFIG=$PWD/kubeconfig
+```
 
+Check connection:
+```bash
+kubectl get ns
+```
+
+example output:
+```console
+NAME              STATUS   AGE
+default           Active   7m56s
+kube-node-lease   Active   7m56s
+kube-public       Active   7m56s
+kube-system       Active   7m56s
+```
 
 {{% alert color="info" %}}
 Talos-bootstrap will enable bootstrap on the first configured node in a cluster. If you want to rebootstrap the etcd cluster, simply remove the line `BOOTSTRAP_ETCD=false` from your `cluster.conf` file.
@@ -128,4 +149,9 @@ Talos-bootstrap will enable bootstrap on the first configured node in a cluster.
 
 Repeat the step for the other nodes in a cluster.
 
+{{% alert color="warning" %}}
+:warning: All nodes should currently show as `READY: False`, don't worry about that, this is because you disabled the default CNI plugin in the previous step. Cozystack will install it's own CNI-plugin on the next step.
+{{% /alert %}}
+
 Now follow **Get Started** guide starting from the [**Install Cozystack**](/docs/get-started/#install-cozystack) section, to continue the installation.
+
