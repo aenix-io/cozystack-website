@@ -144,9 +144,13 @@ Here you can find reference repository to learn how to configure Cozystack servi
 - https://github.com/aenix-io/cozystack-gitops-example
 
 ### How to rotate CA
+In general, you almost never need to rotate the root CA certificate and key for the Talos API and Kubernetes API. Talos sets up root certificate authorities with the lifetime of 10 years, and all Talos and Kubernetes API certificates are issued by these root CAs. So the rotation of the root CA is only needed if:
+- you suspect that the private key has been compromised;
+- you want to revoke access to the cluster for a leaked talosconfig or kubeconfig;
+- once in 10 years.
 
 #### For tenant k8s cluster:
-
+See: https://kamaji.clastix.io/guides/certs-lifecycle/
 ```bash
 export NAME=k8s-cluster-name
 kubectl delete secret ${NAME}-ca
@@ -170,7 +174,7 @@ Wait for virt-launcher-kubernetes-* pods restart.
 Download new k8s certificate.
 
 #### For managment k8s cluster:
-See talos docs: https://www.talos.dev/v1.9/advanced/ca-rotation/#kubernetes-api
+See: https://www.talos.dev/v1.9/advanced/ca-rotation/#kubernetes-api
 ```bash
 git clone https://github.com/aenix-io/cozystack.git
 cd packages/core/testing
