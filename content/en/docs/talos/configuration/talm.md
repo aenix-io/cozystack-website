@@ -70,7 +70,7 @@ Discovered open port 50000/tcp on 192.168.100.192
 ```
 {{% /alert %}}
 
-Now, create a nodes directory and collect the information from your nodes into a node specific file each:
+Now, create a nodes directory and collect the information from your nodes into a node-specific file for each node:
 
 ```bash
 mkdir nodes
@@ -87,7 +87,7 @@ talm apply -f nodes/srv2.yaml -i
 talm apply -f nodes/srv3.yaml -i
 ```
 
-Wait until all nodes rebooted. Remove installation media (USB-Stick, ...) to ensure its booting from internal disk now.
+Wait until all nodes have rebooted. Remove the installation media (e.g., USB stick) to ensure that the nodes boot from the internal disk.
 
 In future operations, you can also use the following options:
 
@@ -100,7 +100,7 @@ Now, bootstrap the cluster by running this command against the first node (only 
 talm bootstrap -f nodes/srv1.yaml
 ```
 
-To access the cluster, generate an admin kubeconfig (only for first node!):
+To access the cluster, generate the admin kubeconfig (only for first node!):
 
 ```bash
 talm kubeconfig kubeconfig -f nodes/srv1.yaml
