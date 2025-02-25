@@ -167,7 +167,7 @@ kubectl delete secret ${NAME}-controller-manager-kubeconfig
 kubectl delete secret ${NAME}-konnectivity-kubeconfig
 kubectl delete secret ${NAME}-scheduler-kubeconfig
 
-k delete po -l app.kubernetes.io/name=kamaji -n cozy-kamaji
+kubectl delete po -l app.kubernetes.io/name=kamaji -n cozy-kamaji
 ```
 
 Wait for virt-launcher-kubernetes-* pods restart.
