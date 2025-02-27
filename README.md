@@ -5,7 +5,8 @@ Cozystack.io website
 ```bash
 wget https://github.com/gohugoio/hugo/releases/download/v0.122.0/hugo_extended_0.122.0_linux-amd64.tar.gz
 tar -xzf hugo_extended_0.122.0_linux-amd64.tar.gz
- chmod +x /usr/local/bin/hugo
+sudo mv hugo /usr/local/bin/
+chmod +x /usr/local/bin/hugo
 ```
 
 ## Run docs

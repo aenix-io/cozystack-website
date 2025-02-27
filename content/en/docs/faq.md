@@ -99,7 +99,7 @@ data:
 
 #### How to enable access to dashboard via ingress-controller
 
-Update your `ingress` application and enable `dashboard: true` option in it.  
+Update your `ingress` application and enable `dashboard: true` option in it.
 Dashboard will become available under: `https://dashboard.<your_domain>`
 
 #### How to cleanup etcd state
@@ -210,4 +210,45 @@ See: https://www.talos.dev/v1.9/advanced/ca-rotation/#talos-api
 All like for managment k8s cluster, but talosctl command:
 ```bash
 talosctl rotate-ca -e 12.34.56.77,12.34.56.78,12.34.56.79  --control-plane-nodes 12.34.56.77,12.34.56.78,12.34.56.79 --kubernetes=false  --dry-run=false &
+```
+
+### Multi DC configuration
+
+#### Label nodes
+
+```bash
+kubectl label node <nodename> topology.kubernetes.io/zone=A
+```
+
+#### Configure PodTopologySpread
+
+See: https://kubernetes.io/docs/concepts/scheduling-eviction/topology-spread-constraints/#cluster-level-default-constraints
+
+For Talm installation:
+Add to `templates/_helpers.tpl`.
+
+```yaml
+cluster:
+...
+  scheduler:
+    config:
+      apiVersion: kubescheduler.config.k8s.io/v1beta3
+      kind: KubeSchedulerConfiguration
+      profiles:
+        - schedulerName: default-scheduler
+          pluginConfig:
+            - name: PodTopologySpread
+              args:
+                defaultConstraints:
+                  - maxSkew: 1
+                    topologyKey: topology.kubernetes.io/zone
+                    whenUnsatisfiable: ScheduleAnyway
+                defaultingType: List
+```
+
+Apply changes:
+
+```bash
+talm template -f nodes/node1.yaml -I
+talm apply -f nodes/node1.yaml
 ```
