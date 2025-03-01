@@ -34,6 +34,7 @@ An example of command-line arguments for etcd:
 When using `talm` to manage your Talos nodes, add parameters to the `cluster.etcd` section of the template:
 
 ```yaml
+cluster:
   etcd:
     extraArgs:
       heartbeat-interval: "1000"
