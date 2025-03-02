@@ -172,8 +172,8 @@ params:
 
 menus:
   main:
-  - name: Ænix
-    url: https://aenix.io
+  - name: Enterprise support
+    url: /support
     weight: 5
   - name: GitHub
     url: https://github.com/aenix-io/cozystack
