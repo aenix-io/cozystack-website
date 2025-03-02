@@ -7,10 +7,10 @@ weight: 10
 
 ## Potential problems
 
-**etcd** is a reliable key-value store for critical data, the place where the Kubernetes API server stores its data. Values
-are not considered written until a quorum of nodes report that data has been written. Also, etcd constantly checks that
-there is a leader and every node is aware which one it is. Usually, an etcd cluster is run on nodes in the same
-datacenter (where latency is low) and default timeouts are tuned for the quickest error reporting possible. In a
+**etcd** is a reliable key-value store for critical data, the place where the Kubernetes API server stores its data.
+Values are not considered written until a quorum of nodes reports that data has been written. Also, etcd constantly
+checks that there is a leader and every node is aware which one it is. Usually, an etcd cluster is run on nodes in the
+same datacenter (where latency is low) and default timeouts are tuned for the quickest error reporting possible. In a
 stretched cluster, where nodes are in different datacenters, the RTT is much higher and default timeouts can cause false
 alarms as if the network was partitioned. In this case, the data is still consistent, but etcd will enter readonly mode
 to prevent split-brain. This could happen so frequently that many other components of Kubernetes would start to fail
