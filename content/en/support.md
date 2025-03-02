@@ -1,7 +1,7 @@
 ---
 title: "Support"
 date: 2025-03-02T15:45:07+04:00
-draft: true
+draft: false
 type: "page"
 weight: 50
 ---
