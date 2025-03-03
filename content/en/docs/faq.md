@@ -142,3 +142,72 @@ in the result, you’ll receive the tenant-kubeconfig file, which you can provid
 Here you can find reference repository to learn how to configure Cozystack services using GitOps approach:
 
 - https://github.com/aenix-io/cozystack-gitops-example
+
+### How to rotate CA
+In general, you almost never need to rotate the root CA certificate and key for the Talos API and Kubernetes API. Talos sets up root certificate authorities with the lifetime of 10 years, and all Talos and Kubernetes API certificates are issued by these root CAs. So the rotation of the root CA is only needed if:
+- you suspect that the private key has been compromised;
+- you want to revoke access to the cluster for a leaked talosconfig or kubeconfig;
+- once in 10 years.
+
+#### For tenant k8s cluster:
+See: https://kamaji.clastix.io/guides/certs-lifecycle/
+```bash
+export NAME=k8s-cluster-name
+kubectl delete secret ${NAME}-ca
+kubectl delete secret ${NAME}-sa-certificate
+
+kubectl delete secret ${NAME}-api-server-certificate
+kubectl delete secret ${NAME}-api-server-kubelet-client-certificate
+kubectl delete secret ${NAME}-datastore-certificate
+kubectl delete secret ${NAME}-front-proxy-client-certificate
+kubectl delete secret ${NAME}-konnectivity-certificate
+
+kubectl delete secret ${NAME}-admin-kubeconfig
+kubectl delete secret ${NAME}-controller-manager-kubeconfig
+kubectl delete secret ${NAME}-konnectivity-kubeconfig
+kubectl delete secret ${NAME}-scheduler-kubeconfig
+
+kubectl delete po -l app.kubernetes.io/name=kamaji -n cozy-kamaji
+```
+
+Wait for virt-launcher-kubernetes-* pods restart.
+Download new k8s certificate.
+
+#### For managment k8s cluster:
+See: https://www.talos.dev/v1.9/advanced/ca-rotation/#kubernetes-api
+```bash
+git clone https://github.com/aenix-io/cozystack.git
+cd packages/core/testing
+make apply
+make exec
+```
+
+Add to your talosconfig in pod:
+```yaml
+    client-aenix-new:
+        endpoints:
+        - 12.34.56.77
+        - 12.34.56.78
+        - 12.34.56.79
+        nodes:
+        - 12.34.56.77
+        - 12.34.56.78
+        - 12.34.56.79
+```
+
+Exec in pod:
+```bash
+talosctl rotate-ca -e 12.34.56.77,12.34.56.78,12.34.56.79  --control-plane-nodes 12.34.56.77,12.34.56.78,12.34.56.79 --talos=false  --dry-run=false &
+```
+
+Get new kubeconfig:
+```bash
+talm kubeconfig kubeconfig -f nodes/srv1.yaml
+```
+
+#### For talos API
+See: https://www.talos.dev/v1.9/advanced/ca-rotation/#talos-api
+All like for managment k8s cluster, but talosctl command:
+```bash
+talosctl rotate-ca -e 12.34.56.77,12.34.56.78,12.34.56.79  --control-plane-nodes 12.34.56.77,12.34.56.78,12.34.56.79 --kubernetes=false  --dry-run=false &
+```

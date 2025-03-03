@@ -70,29 +70,37 @@ Discovered open port 50000/tcp on 192.168.100.192
 ```
 {{% /alert %}}
 
-Now, create a nodes directory and collect the information from your node into a specific file:
+Now, create a nodes directory and collect the information from your nodes into a node-specific file for each node:
 
 ```bash
+mkdir nodes
 talm template -e 192.168.100.63 -n 192.168.100.63 -t templates/controlplane.yaml -i > nodes/srv1.yaml
+talm template -e 192.168.100.159 -n 192.168.100.159 -t templates/controlplane.yaml -i > nodes/srv2.yaml
+talm template -e 192.168.100.192 -n 192.168.100.192 -t templates/controlplane.yaml -i > nodes/srv3.yaml
 ```
 
-Where `192.168.100.63` is the IP address of your node.
-
-Check the generated file, and if everything is okay, apply it:
+Check the generated files, and if everything is okay, apply it:
 
 ```bash
 talm apply -f nodes/srv1.yaml -i
+talm apply -f nodes/srv2.yaml -i
+talm apply -f nodes/srv3.yaml -i
 ```
+
+Wait until all nodes have rebooted. Remove the installation media (e.g., USB stick) to ensure that the nodes boot from the internal disk.
+
 In future operations, you can also use the following options:
 
 - `--dry-run` - dry run mode will show a diff with the existing configuration.
 - `-m try` - try mode will rollback the configuration in 1 minute.
 
+Now, bootstrap the cluster by running this command against the first node (only for first node!):
+
 ```bash
 talm bootstrap -f nodes/srv1.yaml
 ```
 
-To access the cluster, generate an admin kubeconfig:
+To access the cluster, generate the admin kubeconfig (only for first node!):
 
 ```bash
 talm kubeconfig kubeconfig -f nodes/srv1.yaml
