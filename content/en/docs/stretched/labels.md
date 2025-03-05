@@ -14,6 +14,21 @@ to label Kubernetes nodes. Public clouds typically use the `zone` and `region` t
 to designate a geographical location is to use `topology.kubernetes.io/zone` and `topology.kubernetes.io/region`
 labels (or only the zone one).
 
+## Create topology config
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cozystack-scheduling
+  namespace: cozy-system
+data:
+  topologyConfig: |
+    topologySpreadConstraints:
+    - maxSkew: 1
+      topologyKey: topology.kubernetes.io/zone
+      whenUnsatisfiable: DoNotSchedule
+```
+
 ## Talos example
 
 While labels are usually set manually in other Kubernetes distributions, with Talos you can describe the topology as
