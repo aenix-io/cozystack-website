@@ -51,7 +51,7 @@ To create a user, refer to the following documentation:
 - **`cozystack-cluster-admin`**
   - Allow all.
 
-- **`kubeapps-admin`**
+- **`cozystack-cluster-admin`**
   - Allow all in "" api group
   - Allow all for helmreleases in helm.toolkit.fluxcd.io and apps.cozystack.io
 
