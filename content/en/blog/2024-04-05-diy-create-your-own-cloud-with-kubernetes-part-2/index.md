@@ -253,7 +253,7 @@ This enables failover that works independently of Kubernetes control-plane.
 
 This concludes our overview of virtualization, storage, and networking in Kubernetes.
 The technologies mentioned here are available and already pre-configured on the
-[Cozystack](https://github.com/aenix-io/cozystack) platform, where you can try them with no limitations.
+[Cozystack](https://github.com/cozystack/cozystack) platform, where you can try them with no limitations.
 
 In the [next article](/blog/2024/04/05/diy-create-your-own-cloud-with-kubernetes-part-3/),
 I'll detail how, on top of this, you can implement the provisioning of fully functional Kubernetes

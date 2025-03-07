@@ -1,4 +1,4 @@
-module github.com/aenix-io/cozystack-website
+module github.com/cozystack/website
 
 go 1.18
 

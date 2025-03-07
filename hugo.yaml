@@ -92,9 +92,9 @@ outputs:
 params:
   description: Free and Open Source PaaS-platform for seamless management of virtual machines, managed Kubernetes, and Databases-as-a-Service
   copyright: Ænix,
-  github_repo: https://github.com/aenix-io/cozystack-website
+  github_repo: https://github.com/cozystack/website
   github_branch: main
-  github_project_repo: https://github.com/aenix-io/cozystack
+  github_project_repo: https://github.com/cozystack/cozystack
   slack: https://cloud-native.slack.com/messages/cozystack
   support: /support
   images: [img/cozystack-social.png]
@@ -157,7 +157,7 @@ params:
     # Developer relevant links. These will show up on right side of footer and in the community page if you have one.
     developer:
       - name: Cozystack project on GitHub
-        url: https://github.com/aenix-io/cozystack
+        url: https://github.com/cozystack/cozystack
         icon: fab fa-github
         desc: Development takes place here!
       - name: Slack
@@ -176,7 +176,7 @@ menus:
     url: /support
     weight: 5
   - name: GitHub
-    url: https://github.com/aenix-io/cozystack
+    url: https://github.com/cozystack/cozystack
     weight: 10
 
 services:

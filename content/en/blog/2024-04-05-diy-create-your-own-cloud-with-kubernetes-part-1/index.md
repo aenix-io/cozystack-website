@@ -177,7 +177,7 @@ image, and you can use a simple Debian-flavored script to help you bootstrap you
 
 [![asciicast](asciicast.svg)](https://asciinema.org/a/627123)
 
-The [source](https://github.com/aenix-io/talos-bootstrap/) for that `talos-bootstrap` script is
+The [source](https://github.com/cozystack/talos-bootstrap/) for that `talos-bootstrap` script is
 available on GitHub.
 
 This script allows you to deploy Kubernetes on bare metal in five minutes and obtain a kubeconfig
@@ -242,7 +242,7 @@ cozy-victoria-metrics-operator   victoria-metrics-operator   4m1s   True    Rele
 
 As a result, you achieve a highly repeatable environment that you can provide to anyone, knowing
 that it operates exactly as intended.
-This is actually what the [Cozystack](https://github.com/aenix-io/cozystack) project does, which
+This is actually what the [Cozystack](https://github.com/cozystack/cozystack) project does, which
 you can try out for yourself absolutely free.
 
 In the following articles, I will discuss

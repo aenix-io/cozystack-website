@@ -5,7 +5,7 @@ description: "Bootstrap a Talos Linux cluster for Cozystack using Talm"
 weight: 20
 ---
 
-[Talm](https://github.com/aenix-io/talm) is a Helm-like utility for declarative configuration management of Talos Linux.
+[Talm](https://github.com/cozystack/talm) is a Helm-like utility for declarative configuration management of Talos Linux.
 
 It was created by Ænix to allow more declarative and custom configurations for cluster management.
 

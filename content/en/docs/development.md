@@ -25,7 +25,7 @@ In short, cozystack is a seed container that bootstraps the entire platform. It 
 
 ## Repository Structure
 
-The main structure of the [cozystack](https://github.com/aenix-io/cozystack) repository is:
+The main structure of the [cozystack](https://github.com/cozystack/cozystack) repository is:
 
 ```shell
 .
@@ -44,7 +44,7 @@ Development can be done locally by modifying and updating files in this reposito
 
 ## Packages
 
-### [core](https://github.com/aenix-io/cozystack/tree/main/packages/core)
+### [core](https://github.com/cozystack/cozystack/tree/main/packages/core)
 
 Core packages are used to bootstrap Cozystack and its configuration itself.
 
@@ -68,7 +68,7 @@ installed in the cluster.
 Core packages do not use Helm to apply manifests; they are intended to be used only as `helm template . | kubectl apply -f -`.
 {{% /alert %}}
 
-### [system](https://github.com/aenix-io/cozystack/tree/main/packages/system)
+### [system](https://github.com/cozystack/cozystack/tree/main/packages/system)
 
 System packages configure the system to manage and deploy user applications. The
 necessary system components are specified in the bundle configuration. This can also
@@ -79,13 +79,13 @@ of user applications.
 System packages use Helm to install and are managed by FluxCD.
 {{% /alert %}}
 
-### [apps](https://github.com/aenix-io/cozystack/tree/main/packages/apps)
+### [apps](https://github.com/cozystack/cozystack/tree/main/packages/apps)
 
 These user-facing applications appear in the dashboard and include manifests to be applied to the cluster.
 
 They should not contain business logic, because they are managed by operators installed from system.
 
-### [extra](https://github.com/aenix-io/cozystack/tree/main/packages/extra)
+### [extra](https://github.com/cozystack/cozystack/tree/main/packages/extra)
 
 Similar to `apps` but not shown in the application catalog. They can only be installed as part of a tenant.
 They are allowed to use by bottom tenants installed in current tenant namespace.
@@ -186,7 +186,7 @@ Feel free to look inside each Makefile to better understand the logic.
 
 ### Testing
 
-The platform includes an [`e2e.sh`](https://github.com/aenix-io/cozystack/blob/main/hack/e2e.sh) script that performs the following tasks:
+The platform includes an [`e2e.sh`](https://github.com/cozystack/cozystack/blob/main/hack/e2e.sh) script that performs the following tasks:
 
 - Runs three QEMU virtual machines
 - Configures Talos Linux
