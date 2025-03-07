@@ -9,7 +9,7 @@ date: 2024-05-29
 
 The Cozystack project has released Talm, a configuration manager for Talos Linux
 
-The developers of the open-source PaaS platform [Cozystack](https://cozystack.io/) have prepared the [Talm](https://github.com/aenix-io/talm) project, aimed at simplifying the configuration of bare-metal servers for [Talos Linux](https://www.talos.dev/), an operating system designed to run Kubernetes with a Kubernetes-like API and configured via a single Yaml manifest. Although Talm was created to describe the declarative installation of Cozystack, it is not tied specifically to this platform and can be used to manage any Talos Linux configurations. The project is developed under the MPL license.
+The developers of the open-source PaaS platform [Cozystack](https://cozystack.io/) have prepared the [Talm](https://github.com/cozystack/talm) project, aimed at simplifying the configuration of bare-metal servers for [Talos Linux](https://www.talos.dev/), an operating system designed to run Kubernetes with a Kubernetes-like API and configured via a single Yaml manifest. Although Talm was created to describe the declarative installation of Cozystack, it is not tied specifically to this platform and can be used to manage any Talos Linux configurations. The project is developed under the MPL license.
 
 The need to develop another configuration manager for Talos Linux stems from its focus on bare-metal servers. The developers aimed to create the simplest interface possible, similar to well-known Kubernetes administration tools like Helm and kubectl.
 

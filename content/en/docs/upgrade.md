@@ -38,7 +38,7 @@ And add missing key: value data.
 ### Apply new version
 ```bash
 version=vX.Y.Z
-kubectl apply -f https://github.com/aenix-io/cozystack/raw/$version/manifests/cozystack-installer.yaml
+kubectl apply -f https://github.com/cozystack/cozystack/raw/$version/manifests/cozystack-installer.yaml
 ```
 
 ### Check cozystack status

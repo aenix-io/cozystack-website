@@ -5,7 +5,7 @@ description: "Bootstrap a Talos Linux cluster for Cozystack using talos-bootstra
 weight: 10
 ---
 
-[talos-bootstrap](https://github.com/aenix-io/talos-bootstrap/) is an interactive script for bootstrapping Kubernetes clusters on Talos OS.
+[talos-bootstrap](https://github.com/cozystack/talos-bootstrap/) is an interactive script for bootstrapping Kubernetes clusters on Talos OS.
 
 It was created by Ænix to simplify the installation of Talos Linux on bare metal nodes in a user-friendly manner.
 
@@ -44,7 +44,7 @@ machine:
     - name: zfs
     - name: spl
   install:
-    image: ghcr.io/aenix-io/cozystack/talos:v1.9.3
+    image: ghcr.io/cozystack/cozystack/talos:v1.9.3
   files:
   - content: |
       [plugins]
@@ -109,7 +109,7 @@ If you use keycloak.
 Where example.com is your `root-host`.
 {{% /alert %}}
 
-Run [talos-bootstrap](https://github.com/aenix-io/talos-bootstrap/) to deploy the first node in a cluster:
+Run [talos-bootstrap](https://github.com/cozystack/talos-bootstrap/) to deploy the first node in a cluster:
 
 ```bash
 talos-bootstrap install

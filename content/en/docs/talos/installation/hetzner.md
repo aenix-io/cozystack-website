@@ -49,11 +49,11 @@ DISK=$(lsblk -dn -o NAME,SIZE,TYPE -e 1,7,11,14,15 | sort | sed -n 1p | awk '{pr
 echo "DISK=$DISK"
 ```
 
-Download Talos Linux asset from the Cozystack's [releases page](https://github.com/aenix-io/cozystack/releases), and write it into disk:
+Download Talos Linux asset from the Cozystack's [releases page](https://github.com/cozystack/cozystack/releases), and write it into disk:
 
 ```bash
 cd /tmp
-wget https://github.com/aenix-io/cozystack/releases/latest/download/nocloud-amd64.raw.xz
+wget https://github.com/cozystack/cozystack/releases/latest/download/nocloud-amd64.raw.xz
 xz -d -c /tmp/nocloud-amd64.raw.xz | dd of="/dev/$DISK" bs=4M oflag=sync
 ```
 
@@ -145,7 +145,7 @@ sync
 reboot
 ```
 
-Now, when it is booted to Talos Linux maintenance mode, you can use [talos-bootstrap](https://github.com/aenix-io/talos-bootstrap) or [Talm](https://github.com/aenix-io/talm) to bootstrap the cluster
+Now, when it is booted to Talos Linux maintenance mode, you can use [talos-bootstrap](https://github.com/cozystack/talos-bootstrap) or [Talm](https://github.com/cozystack/talm) to bootstrap the cluster
 
 
 Just follow **Get Started** guide starting from the [**Bootstrap cluster**](/docs/get-started/#bootstrap-cluster) section, to continue the installation.

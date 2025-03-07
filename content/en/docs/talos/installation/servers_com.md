@@ -89,10 +89,10 @@ DISK=$(lsblk -dn -o NAME,SIZE,TYPE -e 1,7,11,14,15 | sort | sed -n 1p | awk '{pr
 echo "DISK=$DISK"
 ```
 
-Download Talos Linux asset from the Cozystack’s [releases page](https://github.com/aenix-io/cozystack/releases), and write it into disk:
+Download Talos Linux asset from the Cozystack’s [releases page](https://github.com/cozystack/cozystack/releases), and write it into disk:
 ```bash
 cd /tmp
-wget https://github.com/aenix-io/cozystack/releases/latest/download/metal-amd64.raw.xz
+wget https://github.com/cozystack/cozystack/releases/latest/download/metal-amd64.raw.xz
 xz -d -c /tmp/metal-amd64.raw.xz | dd of="/dev/$DISK" bs=4M oflag=sync
 ```
 
@@ -179,7 +179,7 @@ machine:
           ip: 192.168.100.10
   install:
     disk: /dev/sdb
-    image: ghcr.io/aenix-io/cozystack/talos:v1.8.0
+    image: ghcr.io/cozystack/cozystack/talos:v1.8.0
   files:
     - content: "[plugins]\n  [plugins.\"io.containerd.grpc.v1.cri\"]\n    device_ownership_from_security_context = true      \n  [plugins.\"io.containerd.cri.v1.runtime\"]\n    device_ownership_from_security_context = true\n"
       permissions: 0o0

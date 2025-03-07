@@ -19,7 +19,7 @@ You might want to overwrite specific options for the components.
 To achieve this, you must specify values in JSON or YAML format using the values-<component> option.
 
 For example, if you want to overwrite `k8sServiceHost` and `k8sServicePort` for cilium,
-take a look at its [values.yaml](https://github.com/aenix-io/cozystack/blob/238061efbc0da61d60068f5de31d6eaa35c4d994/packages/system/cilium/values.yaml#L18-L19) file.
+take a look at its [values.yaml](https://github.com/cozystack/cozystack/blob/238061efbc0da61d60068f5de31d6eaa35c4d994/packages/system/cilium/values.yaml#L18-L19) file.
 
 Then specify these options in the `values-cilium` section of your Cozystack configuration, as shown below:
 
@@ -141,7 +141,7 @@ in the result, you’ll receive the tenant-kubeconfig file, which you can provid
 
 Here you can find reference repository to learn how to configure Cozystack services using GitOps approach:
 
-- https://github.com/aenix-io/cozystack-gitops-example
+- https://github.com/cozystack/cozystack-gitops-example
 
 ### How to rotate CA
 In general, you almost never need to rotate the root CA certificate and key for the Talos API and Kubernetes API. Talos sets up root certificate authorities with the lifetime of 10 years, and all Talos and Kubernetes API certificates are issued by these root CAs. So the rotation of the root CA is only needed if:
@@ -176,7 +176,7 @@ Download new k8s certificate.
 #### For managment k8s cluster:
 See: https://www.talos.dev/v1.9/advanced/ca-rotation/#kubernetes-api
 ```bash
-git clone https://github.com/aenix-io/cozystack.git
+git clone https://github.com/cozystack/cozystack.git
 cd packages/core/testing
 make apply
 make exec

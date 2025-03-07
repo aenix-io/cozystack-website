@@ -18,8 +18,8 @@ Cozystack strives to comply with the [LF Telemetry Data Policy](https://www.linu
 Our focus is on gathering non-personal usage metrics about Cozystack components rather than personal user information. We specifically collect information on the most commonly used application packages, the bundle names in use, enabled Cozystack features, as well as kernel versions and operating systems running in the environment. This collected data helps us gain insights into prevalent configurations and usage trends across installations.
 
 For a detailed view of what data is collected, you can review the telemetry implementation:
-- [Telemetry Client](https://github.com/aenix-io/cozystack/tree/main/internal/telemetry)
-- [Telemetry Server](https://github.com/aenix-io/cozystack-telemetry-server/)
+- [Telemetry Client](https://github.com/cozystack/cozystack/tree/main/internal/telemetry)
+- [Telemetry Server](https://github.com/cozystack/cozystack-telemetry-server/)
 
 ### Example of Telemetry Payload:
 

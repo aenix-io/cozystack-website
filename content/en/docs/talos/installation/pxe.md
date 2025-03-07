@@ -17,7 +17,7 @@ weight: 10
 Start matchbox with prebuilt Talos image for Cozystack:
 
 ```bash
-sudo docker run --name=matchbox -d --net=host ghcr.io/aenix-io/cozystack/matchbox:v0.27.0 \
+sudo docker run --name=matchbox -d --net=host ghcr.io/cozystack/cozystack/matchbox:v0.27.0 \
   -address=:8080 \
   -log-level=debug
 ```
@@ -60,13 +60,13 @@ example output:
 ```console
 CONTAINER ID   IMAGE                                               COMMAND                  CREATED          STATUS          PORTS     NAMES
 06115f09e689   quay.io/poseidon/dnsmasq:v0.5.0-32-g4327d60-amd64   "/usr/sbin/dnsmasq -…"   47 seconds ago   Up 46 seconds             dnsmasq
-6bf638f0808e   ghcr.io/aenix-io/cozystack/matchbox:v0.27.0         "/matchbox -address=…"   3 minutes ago    Up 3 minutes              matchbox
+6bf638f0808e   ghcr.io/cozystack/cozystack/matchbox:v0.27.0         "/matchbox -address=…"   3 minutes ago    Up 3 minutes              matchbox
 ```
 
 Start your servers, now they should automatically boot from your PXE server.
 
 
-Now, when they are booted to Talos Linux maintenance mode, you can use [talos-bootstrap](https://github.com/aenix-io/talos-bootstrap) or [Talm](https://github.com/aenix-io/talm) to bootstrap the cluster
+Now, when they are booted to Talos Linux maintenance mode, you can use [talos-bootstrap](https://github.com/cozystack/talos-bootstrap) or [Talm](https://github.com/cozystack/talm) to bootstrap the cluster
 
 
 Just follow **Get Started** guide starting from the [**Bootstrap cluster**](/docs/get-started/#bootstrap-cluster) section, to continue the installation.
