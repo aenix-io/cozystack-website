@@ -37,8 +37,12 @@ Any Linux system installed on it (eg. Ubuntu should be enough)
 - Deploy etcd, ingress and monitoring stack
 
 
-## Talos Linux Installation
+## Create Kubernetes cluster
 
+Cozystack installs on top of a Kubernetes cluster. Talos is the only Kubernetes distribution that is fully supported by
+Cozystack.
+
+### Talos Linux Installation
 
 Follow one of the guide to boot your machines with Talos Linux image:
 
@@ -47,12 +51,23 @@ Follow one of the guide to boot your machines with Talos Linux image:
 - [**Hetzner**](/docs/talos/installation/hetzner/) - for installation on Hetzner servers.
 
 
-## Bootstrap cluster
+### Bootstrap Talos cluster
 
 Follow the guide to bootstrap your Talos Linux cluster using one of the following tools:
 
 - [**talos-bootstrap**](/docs/talos/configuration/talos-bootstrap/) - for a quick walkthrough
 - [**Talm**](/docs/talos/configuration/talm/) - for declarative cluster management
+
+### Other Kubernetes distributions
+
+If you bootstrap your Talos cluster in your own way, or even try to use a different Kubernetes distribution, make sure
+to implement all settings from the guides above. The most important settings are:
+
+* Any CNI plugin must be disabled, as Cozystack will install its own.
+* Kubernetes cluster domain must be set to `cozy.local`.
+* Listen address of some Kubernetes components must be changed from localhost to a network-reachable address.
+* Kubernetes API server must be reachable on localhost.
+
 
 ## Install Cozystack
 
